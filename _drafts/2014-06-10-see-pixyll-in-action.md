@@ -123,6 +123,15 @@ hopefully sidestep this inconvenience.
   <footer><cite title="Antoine de Saint-Exupéry">Antoine de Saint-Exupéry</cite></footer>
 </blockquote>
 
+
+### Math mode
+Very important for math-based explanations we can also use LaTeX commands.
+
+\begin{equation}
+	p(m) = \left< \psi \middle| M^\dagger_m M_m \middle| \psi \right>,
+\end{equation}
+where $\\{ M_m \\}$ is a collection of measurement operators.
+
 ### There's more being added all the time
 
 Checkout the [Github repository](https://github.com/johnotander/pixyll) to request,
