@@ -22,9 +22,12 @@
     {% if site.google_plus_id %}
       <a class="fa fa-google-plus" href="https://plus.google.com/{{ site.google_plus_id }}/posts"></a>
     {% endif %}
+    <a class="fa fa-envelope" href="http://www.google.com/recaptcha/mailhide/d?k=01bORbraFoTrT6KYNphpMtVQ==&amp;c=q_pE-kA8bAHg6YIU7QSlmYMoheGbwwX6MOP5tISq3-M=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\x3d01bORbraFoTrT6KYNphpMtVQ\x3d\x3d\x26c\x3dq_pE-kA8bAHg6YIU7QSlmYMoheGbwwX6MOP5tISq3-M\x3d', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address"></a>
+    {% comment %}
     {% if site.email %}
       <a class="fa fa-envelope" href="mailto:{{ site.email }}"></a>
     {% endif %}
+    {% endcomment %}
     {% if site.linkedin_username %}
       <a class="fa fa-linkedin" href="https://www.linkedin.com/in/{{ site.linkedin_username }}"></a>
     {% endif %}

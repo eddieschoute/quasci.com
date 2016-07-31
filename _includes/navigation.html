@@ -3,8 +3,10 @@
         <a href="{{ page.url }}">{{ page.title }}</a>
     {% endif %}
 {% endfor %}
+{% comment %}
 {% for page in site.pages %}
     {% if page.tags contains "contact" %}
         <a href="{{ page.url }}">{{ page.title }}</a>
     {% endif %}
 {% endfor %}
+{% endcomment %}

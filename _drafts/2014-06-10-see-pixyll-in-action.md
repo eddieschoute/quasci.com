@@ -10,7 +10,7 @@ There is a significant amount of subtle, yet precisely calibrated, styling to en
 that your content is emphasized while still looking aesthetically pleasing.
 
 All links are easy to [locate and discern](#), yet don't detract from the [harmony
-of a paragraph](#). The _same_ goes for italics and __bold__ elements. Even the the strikeout
+of a paragraph](#). The _same_ goes for italics and __bold__ elements. Even the strikeout
 works if <del>for some reason you need to update your post</del>. For consistency's sake,
 <ins>The same goes for insertions</ins>, of course.
 
