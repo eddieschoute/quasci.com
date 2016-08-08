@@ -17,6 +17,6 @@ tags: about
  : 2\. a quasi-scholarly blog on science.
 
 ## Contribute
-To contribute go to [ eddieschoute](https://github.com/eddieschoute){: .fa .fa-github}/
+To contribute go to [<i class="fa fa-github"></i> eddieschoute](https://github.com/eddieschoute)/
 [quasci.com](https://github.com/eddieschoute/quasci.com/) and submit a pull request. Or send me an email.
 

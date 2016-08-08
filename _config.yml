@@ -4,7 +4,7 @@ email:
 author:     Eddie Schoute
 description: >
   QuaSci.com is a quasi-scholarly blog on quantum science.
-  Posts are related to research and general research life.
+  Posts are related to research as well as general research life.
 baseurl:     ""
 url:         "http://quasci.com"
 # url:         "http://localhost:4000"
