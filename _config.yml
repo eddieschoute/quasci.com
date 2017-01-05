@@ -6,7 +6,7 @@ description: >
   QuaSci.com is a quasi-scholarly blog on quantum science.
   Posts are related to research as well as general research life.
 baseurl:     ""
-url:         "http://quasci.com"
+url:         "http://www.quasci.com"
 # url:         "http://localhost:4000"
 date_format: "%b %-d, %Y"
 
