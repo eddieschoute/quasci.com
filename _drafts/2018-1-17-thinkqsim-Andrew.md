@@ -18,7 +18,7 @@ So why is simulating quantum chemistry so hard for classical computers? We know 
 
 One system that researchers have focused on recently is that of nitrogenase, the enzyme responsible for nitrogen-fixation in bacteria. While nitrogen is ubiquitous in nature - comprising 78% by volume of the air we breathe and featuring in each of the twenty amino acids that make up our proteins - most of the nitrogen on earth takes the form of inert dinitrogen gas. The nitrogenase enzyme can chemically activate nitrogen at standard temperature and pressure, thereby ``fixing'' it. 
 	
-The industrial analogue known as the Haber-Bosch process is used to fix nitrogen, specifically in the form of ammonia. The ammonia can be used to make fertilizer (and also nitro-based explosives, which, according to Nathan Wiebe, singlehandedly allowed Germany to keep fighting in WWI.) The reaction consumes one nitrogen molecule and three hydrogen molecules to form two ammonia molecules:
+The industrial analogue known as the Haber-Bosch process is used to fix nitrogen, specifically in the form of ammonia. The ammonia can be used to make fertilizer (and also nitro-based explosives, which probably helped extend the duration of WWI by a few years.) The reaction consumes one nitrogen molecule and three hydrogen molecules to form two ammonia molecules:
 \begin{align}
 \text{N}_2 + 3 \text{H}_2 \rightarrow 2 \text{NH}_3 \quad (\Delta H^\circ = -45.8 \text{ kJ/mol})
 \end{align}
