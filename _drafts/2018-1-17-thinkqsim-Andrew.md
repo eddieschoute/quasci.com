@@ -8,7 +8,7 @@ categories: conference
 
 # Introduction
 
-*Insert Introduction here*
+Much ink has been spilled on the quest to find splashy applications for the 50-100-qubit quantum computers that will be available for the public to "quantumly experience" in 5-10 years. The goal in researching these problems has always been to find an instance where classical computers struggle, but where quantum computers would excel. This vaunted demonstration of "quantum advantage" would cement the public image of quantum computing as ["Star Wars technology,"](https://www.nytimes.com/2018/01/16/opinion/while-you-were-sleeping.html) and certainly merits further investigation. But my topic for today - and the topic of most of Day 2 of the conference - is one of the oldest applications of quantum computers, going all the way back to Richard Feynman. 
 
 Richard P. Feynman was one of the Great Minds (TM) of 20th-century physics. He shared the Nobel prize in 1965 for co-discovering quantum electrodynamics, lent his name to a half-dozen fundamental concepts in particle physics, and authored a set of famous freshman physics textbooks (as well as a few semi-autobiographical memoirs). More relevantly to this blog post, he also predicted the rise of quantum computing in a 1982 talk titled “Simulating Physics with Computers.”
 
@@ -37,6 +37,7 @@ One way to find the ground state energy of a Hamiltonian is by preparing a syste
 This proposal for finding ground state energies goes by the name of a variational quantum eigensolver (VQE), and is a prime example of a hybrid quantum-classical algorithm. One of the proposals during the conference was to use machine learning to perform state preparation. The idea is to train shallow circuits (“quantum neurons”) to use VQE to prepare complex states of strongly-interacting electron systems. 
 
 ---
+[^0] 
 
 [^1]: See, for example, the talks by Andrew Childs and Garnet Chan. Also, Richard P. Feynman passed away thirty years ago on February 15, 1988. Fun fact: the 100th anniversary of Feynman’s birthday will be on May 11, 2018. 
 
