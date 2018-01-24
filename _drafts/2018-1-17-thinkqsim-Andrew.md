@@ -32,9 +32,11 @@ How do we go about mapping the potential energy surface of a chemical reaction? 
 
 Unfortunately, finding ground state energies is a hard task - even for quantum computers! (Specifically, it has been shown to be QMA-complete for k-local Hamiltonians, $k \ge 2$) [^3]. But even though this asymptotic complexity is daunting, there have been some heuristic algorithms known to work well in practice.
 
-One way to find the ground state energy of a Hamiltonian is by preparing a system in its ground state and measuring the expectation value of its energy: $<\psi|H|\psi>$. But this exact state preparation is still hard (QMA-hard, in fact). So, the next best thing would be to prepare a trial state that is close in energy to the ground state. Let’s say we use a quantum computer that takes a fixed (small) number of input parameters and outputs a specific quantum state. By measuring the expectation value of the energy of that state, we obtain an upper bound to the true ground state energy. Then, using classical optimization techniques to minimize the energy as a function of the input parameters. If we’re smart about this, then we’ll end up getting close to the ground-state energy.
+One way to find the ground state energy of a Hamiltonian is by preparing a system in its ground state and measuring the expectation value of its energy: $\bra{\psi}H\ket{\psi}$. But this exact state preparation is still hard (QMA-hard, in fact). So, the next best thing would be to prepare a trial state that is close in energy to the ground state. Let’s say we use a quantum computer that takes a fixed (small) number of input parameters and outputs a specific quantum state. By measuring the expectation value of the energy of that state, we obtain an upper bound to the true ground state energy. Then, using classical optimization techniques to minimize the energy as a function of the input parameters. If we’re smart about this, then we’ll end up getting close to the ground-state energy.
 
 This proposal for finding ground state energies goes by the name of a variational quantum eigensolver (VQE), and is a prime example of a hybrid quantum-classical algorithm. One of the proposals during the conference was to use machine learning to perform state preparation. The idea is to train shallow circuits (“quantum neurons”) to use VQE to prepare complex states of strongly-interacting electron systems. 
+
+Future simulations by quantum computers could be used to study the behavior of chemical structures like proteins and crystals, or even probe exotic materials like high-temperature superconductors (Garnet Chan). 
 
 ---
 
@@ -45,5 +47,3 @@ This proposal for finding ground state energies goes by the name of a variationa
 [^2]:  Kempe, Julia; Kitaev, Alexei; Regev, Oded (2006). "The complexity of the local Hamiltonian problem". SIAM Journal on Computing. 35 (5): 1070–1097. arXiv:quant-ph/0406180v2 Freely accessible. doi:10.1137/S0097539704445226..
 
 [^3]: http://www.ias.ac.in/article/fulltext/reso/007/09/0069-0077
-
-Future simulations by quantum computers could be used to study the behavior of chemical structures like proteins and crystals, or even probe exotic materials like high-temperature superconductors (Garnet Chan). 
