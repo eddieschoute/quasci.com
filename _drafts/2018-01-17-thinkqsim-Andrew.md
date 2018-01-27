@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      ThinkQ 2017
-date:       2017-1-17 TBD
+date:       2017-01-17 12:00:00
 summary:    Quantum Simulation at the 2017 ThinkQ Conference
 categories: conference
 ---
