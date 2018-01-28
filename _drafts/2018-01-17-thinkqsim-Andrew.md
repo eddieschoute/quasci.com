@@ -1,18 +1,18 @@
 ---
 layout:     post
 title:      ThinkQ 2017
-date:       2017-01-17 12:00:00
+date:       2018-01-17 12:00:00
 summary:    Quantum Simulation at the 2017 ThinkQ Conference
 categories: conference
 ---
 
 # Introduction
 
-Much ink has been spilled on the quest to find splashy applications for the 50-100-qubit quantum computers that will be available for the public to "quantumly experience" in 5-10 years. The goal in researching these problems has always been to find an instance where classical computers struggle, but where quantum computers would excel. This vaunted demonstration of "quantum advantage" would cement the public image of quantum computing as ["Star Wars technology,"](https://www.nytimes.com/2018/01/16/opinion/while-you-were-sleeping.html) and certainly merits further investigation. But my topic for today - and the topic of most of Day 2 of the conference - is one of the oldest applications of quantum computers, going all the way back to Richard Feynman. 
+Much ink has been spilled regarding the quest to find a flashy application for the 50-qubit quantum computers (QCs) that will be available over the next few years. The goal in researching these problems has always been to find an instance where classical computers struggle, but where quantum computers will excel. This vaunted demonstration of a "quantum computational advantage" would cement the public image of quantum computing as ["Star Wars technology,"](https://www.nytimes.com/2018/01/16/opinion/while-you-were-sleeping.html), and certainly merits further investigation. But while some of us search for problems for which near-term QCs have an advantage, others are focusing their attention on a more long-term goal. It's no small wonder that this topic occupied most of the talks during Day 2 of the conference. One of the oldest known applications for QC, quantum simulation occupied most of . This topic takes us all the way back to the late and great physicist, Richard Feynman. 
 
-Richard P. Feynman was one of the Great Minds (TM) of 20th-century physics. He shared the Nobel prize in 1965 for co-discovering quantum electrodynamics, lent his name to a half-dozen fundamental concepts in particle physics, and authored a set of famous freshman physics textbooks (as well as a few semi-autobiographical memoirs). More relevantly to this blog post, he also predicted the rise of quantum computing in a 1982 talk titled “Simulating Physics with Computers.”
+Richard P. Feynman was one of the #GreatMinds of 20th-century physics. He shared the Nobel prize in 1965 for co-discovering quantum electrodynamics; he lends his name to a half-dozen fundamental concepts in particle physics, and he authored a trilogy of famous freshman physics textbooks (as well as a couple hilarious semi-autobiographical memoirs). More relevantly to this blog post, he also predicted the rise of quantum computing in a 1982 talk titled “Simulating Physics with Computers.”
 
-One of the “killer apps” of quantum computers will be the simulation of quantum chemistry and quantum materials. In Feynman’s own words, “Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical, and by golly it's a wonderful problem, because it doesn't look so easy.” Feynman foresaw that the challenge of simulating quantum mechanics in materials science and chemistry would stump even modern-day supercomputers. Now, thirty years after his death, his words still feature in the motivation slides for many quantum simulation talks [^1]. 
+One of the “killer apps” of quantum computers will be the simulation of quantum chemistry and quantum materials.. In Feynman’s own words, “Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical, and by golly it's a wonderful problem, because it doesn't look so easy.” Feynman foresaw that the challenge of simulating quantum mechanics in materials science and chemistry would stump even modern-day supercomputers. Now, thirty years after his death, his words still feature in the motivation slides for many quantum simulation talks [^1]. 
 
 So why is simulating quantum chemistry so hard for classical computers? Well, it goes back to the curse of dimensionality: the more electrons you have in a system, the more parameters you need to describe its quantum state. In fact, the number of parameters will grow exponentially in the number of electrons! In practice, this makes it hard to simulate molecular systems with more than a few atoms. While such exacting quantum mechanical descriptions aren't usually required to understand most chemical phenomena [^1.5], there are many instances where quantum behavior plays an important role in reactions! In particular, the mechanism of catalysts - agents used to speed up chemical reactions without themselves being consumed - makes use of strongly-correlated electrons mostly from d-orbital electrons of transition metals. Simulating such systems certainly requires the use of quantum mechanics!  
 
@@ -40,7 +40,7 @@ Future simulations by quantum computers could be used to study the behavior of c
 
 ---
 
-[^1]: See, for example, the talks by Andrew Childs and Garnet Chan. Also, Richard P. Feynman passed away thirty years ago on February 15, 1988. Fun fact: the 100th anniversary of Feynman’s birthday will be on May 11, 2018. 
+[^1]: See, for example, the talks by Andrew Childs and Garnet Chan. Also, Richard P. Feynman passed away thirty years ago on February 15, 1988. Fun fact: the 100th anniversary of Feynman’s birthday will take place on May 11, 2018. 
 
 [^1.5]: In most systems relevant to organic chemistry and biochemistry, for example, the behavior of electrons can be modeled using semi-classical methods (like DFT).
 
