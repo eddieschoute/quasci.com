@@ -13,7 +13,7 @@ categories: conference high-level
 _Editor’s note: At the conclusion of the conference, the Vice President of IBM Q, Dario Gil, convened a panel discussion of quantum computing experts from industry and academia. They discussed the current outlook as well as the future of quantum computation. The three of us had a conversation about the themes brought up during the discussion._
 
 ![The ThinkQ panel]({{ site.url }}/img/thinkq-panel.jpg)
-_The ThinkQ 2017 Panel consisted of (left-to-right): Dave Bacon (Google), Andrew Childs (UMD), Richard Jozsa (Cambridge), Dario Gil (IBM Q), Eleanor Rieffel (NASA), Matthias Steffen (Google), and Jungsang Kim (Duke, IonQ)._
+_The ThinkQ 2017 Panel consisted of (left-to-right): Dave Bacon (Google), Andrew Childs (U. of Maryland), Richard Jozsa (U. of Cambridge), Dario Gil (IBM Q), Eleanor Rieffel (NASA), Matthias Steffen (Google), and Jungsang Kim (Duke U., IonQ)._
 
 __Eddie:__ Andrew and Ani, I have to ask you what you thought about the ThinkQ conference.
 
