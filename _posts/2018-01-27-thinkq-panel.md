@@ -6,7 +6,7 @@ summary: |
   At the conclusion of the conference, the Vice President of IBM Q, Dario Gil,
   convened a panel discussion of quantum computing experts from industry and academia.
   They discussed the current outlook as well as the future of quantum computation.
-  The three of us had a conversation about the themes brought up during the discussion. 
+  The three of us (Eddie Schoute, Andrew Guo, and Aniruddha Bapat) had a conversation about the themes brought up during the discussion. 
 categories: conference high-level
 ---
 
