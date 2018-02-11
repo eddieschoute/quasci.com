@@ -53,7 +53,7 @@ __Andrew:__ Certainly in the near-term, giving the public access to the current 
 
 ![SMBC Earlier Papers]({{ site.url }}/img/smbc-earlier-papers.gif)
 _“Kids these days are publishing their first QC papers younger and younger,”
-Courtesy of Scott Aaronson and ([reproduced](https://www.smbc-comics.com/comic/the-talk-3) with permission of) Zach Weinersmith_
+courtesy of Scott Aaronson and ([reproduced](https://www.smbc-comics.com/comic/the-talk-3) with permission of) Zach Weinersmith_
 
 Think of what could happen when programming a quantum computer comes as naturally as programming a classical computer does for many people today. Twenty year-old Bill Gates co-founded Microsoft; nineteen year-old Mark Zuckerberg created Facebook. Neither could’ve made his impact without early and consistent access to computers. Fast forwarding a few decades into the future, the “killer app” for a universal quantum computer might be devised by someone who hasn’t even been born yet! 
 
