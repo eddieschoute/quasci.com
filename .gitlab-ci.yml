@@ -19,4 +19,4 @@ test:
   script:
   - bundle exec jekyll build --drafts --strict-front-matter
   except:
-  - master
+  - gh-pages
