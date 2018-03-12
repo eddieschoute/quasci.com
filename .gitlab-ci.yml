@@ -1,0 +1,24 @@
+image: ruby:2.5
+
+cache:
+  paths:
+  - vendor/
+
+before_script:
+  - export LANG="C.UTF-8"
+  - export LC_ALL="C.UTF-8"
+  - bundle install --deployment
+
+pages:
+  stage: deploy
+  script:
+  - bundle exec jekyll build --strict-front-matter
+  only:
+  - gh-pages
+
+test:
+  stage: test
+  script:
+  - bundle exec jekyll build --drafts --strict-front-matter
+  except:
+  - gh-pages
