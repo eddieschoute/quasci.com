@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Simulating quantum chemistry
-date:       2018-02-15 0:00:15
+date:       2018-02-15 00:00:15
 summary:    Andrew Guo presents an overview of quantum Hamiltonian simulation and quantum chemistry, with an eye on both the near-term and long-term applications.
 categories: conference
 ---
