@@ -8,7 +8,7 @@ categories: conference
 
 _By Andrew Guo_
 
-Day 2 of the 2017 IBM ThinkQ Conference featured [talks](https://www.research.ibm.com/ibm-q/thinkq/agenda.html) by an impressive array of experts in both the fields of quantum Hamiltonian simulation (Andrew Childs, Robin Kothari, Ryan Babbush, Nathan Wiebe) and quantum chemistry (Ryan Babbush, Garnet Chan). The following post aims to summarize the intersection of those fields and explain how they provide a “killer application” for a quantum computer.
+Day Two of the 2017 IBM ThinkQ Conference featured [talks](https://www.research.ibm.com/ibm-q/thinkq/agenda.html) by an impressive array of experts in both the fields of quantum Hamiltonian simulation (Andrew Childs, Robin Kothari, Ryan Babbush, Nathan Wiebe) and quantum chemistry (Ryan Babbush, Garnet Chan). The following post aims to summarize the intersection of those fields and explain how they provide a “killer application” for a quantum computer.
 
 ## Introduction
 
@@ -36,7 +36,7 @@ One example of a chemical phenomenon that skews more quantum than classical is t
 
 One such catalyst that researchers have focused on recently is nitrogenase, the enzyme responsible for nitrogen-fixation in bacteria[^svore]. While nitrogen is ubiquitous in nature—comprising 78% by volume of the air we breathe and featuring in each of the twenty amino acids that make up our proteins---most of the nitrogen on earth takes the form of inert dinitrogen gas. The nitrogenase enzyme can chemically activate nitrogen at standard temperature and pressure, thereby _fixing_ it. 
 	
-In industry, an analogous reaction known as the Haber-Bosch process is used to fix nitrogen, specifically in the form of ammonia. The ammonia can be then be used to make fertilizer (and nitro-based explosives, which likely helped extend the duration of WWI by a few years.) The reaction consumes one nitrogen molecule and three hydrogen molecules to form two ammonia molecules:
+In industry, an analogous reaction known as the Haber-Bosch process is used to fix nitrogen, specifically in the form of ammonia. The ammonia can be then be used to make fertilizer (or nitro-based explosives—a fact which likely helped extend the duration of WWI by a few years). The reaction consumes one nitrogen molecule and three hydrogen molecules to form two ammonia molecules:
 \begin{align}
 \text{N}_2 + 3 \text{H}_2 \rightarrow 2 \text{NH}_3 \quad (\Delta H^\circ = -45.8 \text{ kJ/mol})
 \end{align}
@@ -72,7 +72,7 @@ _Thanks to Leigh Martin and Stephen Ting for helpful discussions. Special thanks
 
 [^1]: See, for example, the talks by [Andrew Childs](https://www.youtube.com/watch?v=VSTzptzsNp0) and [Garnet Chan](https://www.youtube.com/watch?v=OrRLB-fGS_U).
 
-[^2]: In the micrometer-scale systems that organic and biochemists care about, it usually suffices to model the dynamics of atoms using classical methods such as molecular mechanics. (Which is already a challenge in itself!) For the task of describing molecular orbitals in solid-state systems and quantum chemistry, such mean-field methods as density functional theory have had many successes. Still, systems of strongly-correlated electrons tend to confound them. 
+[^2]: To simulate the dynamics of biochemical systems like proteins, it usually suffices to model them using classical molecular mechanics---which can already be a computationally-intensive task in and of itself. For the task of describing molecular orbitals in solid-state systems and quantum chemistry, mean-field methods such as density functional theory have had many successes. Still, systems of strongly-correlated electrons tend to confound them. 
 
 [^except]: As is the case for most “rules” in chemistry. 
 
