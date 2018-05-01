@@ -72,7 +72,7 @@ _Thanks to Leigh Martin and Stephen Ting for helpful discussions. Special thanks
 
 [^1]: See, for example, the talks by [Andrew Childs](https://www.youtube.com/watch?v=VSTzptzsNp0) and [Garnet Chan](https://www.youtube.com/watch?v=OrRLB-fGS_U).
 
-[^2]: To simulate the dynamics of biochemical systems like proteins, it usually suffices to model them using classical molecular mechanics---which can already be a computationally-intensive task in and of itself. For the task of describing molecular orbitals in solid-state systems and quantum chemistry, mean-field methods such as density functional theory have had many successes. Still, systems of strongly-correlated electrons tend to confound them. 
+[^2]: To simulate the dynamics of biochemical systems like proteins, it usually suffices to model them using classical molecular mechanics---already a computationally-intensive task in and of itself. To compute molecular orbitals in solid-state systems and quantum chemistry, the mean-field method of density functional theory (DFT) has had many successes. Unsurprisingly, DFT still struggles to model systems of strongly-correlated electrons efficiently. 
 
 [^except]: As is the case for most “rules” in chemistry. 
 
