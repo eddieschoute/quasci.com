@@ -1,13 +1,15 @@
 ---
 layout:     post
 title:      Classical vs Quantum Computation
-date:       2018-05-12 16:38:05
-summary:    ThinkQ conference experience
-categories: conference algorithms advantage
+date:       2018-05-07 16:38:05
+summary:    It is believed that quantum computers provide some advantage over classical computers,
+    but do they really? We will look at both closing the gap between classical and quantum
+    and at solidifying it.
+categories: algorithms advantage complexity
 ---
 
 The IBM ThinkQ conference was held recently in New York with a focus on near-term quantum computing applications.
-It seems that businesses that businesses have successfully been developing larger quantum computers
+It seems that businesses have successfully been developing larger quantum computers
 ---we're at around 50 qubits now!--- but are now looking for the "killer app" of small quantum computers.
 There were some variations on the "what to do with your quantum computer" theme
 and I will talk about some of the applications that were discussed.
@@ -17,24 +19,21 @@ All talks and recordings of them are available at the [online schedule](https://
 A _quantum advantage_ refers to some applications where a quantum computer performs some computation
 that a classical computer currently cannot perform.
 Previously known as _quantum supremacy_, it has now been renamed after an internal discussion
-within the community about its political correctness.
-See e.g. one of the most heated [discussions](https://scirate.com/arxiv/1705.06768) I've seen on Scirate,
-which also touches on the Latin origin of the term _ancilla_ ("housemaid", colloquially: helper qubit).
-While almost certainly an internet troll, _ancilla the supremacist_ has become somewhat of a joke in my environment,
-so I guess it has served its purpose.
+within the community about its political correctness[^supremacydiscussion].
 
 So far we actually do not know unconditionally if quantum computing is actually more powerful than classical
 (i.e. $BQP \not\subseteq BPP$).
 But through the problems of Boson Sampling[^boson1] and Instantaneous Quantum Polynomial-time (IQP) circuits[^iqp1]
 we do know that the polynomial hierarchy ($PH$) must collapse if classical computers can solve them efficiently.
-(Simulation and visitor (Hakop)
+
+[^supremacydiscussion]: See e.g. one of the most heated [discussions](https://scirate.com/arxiv/1705.06768) I've seen on Scirate, which also touches on the Latin origin of the term _ancilla_ ("housemaid", colloquially: helper qubit). While almost certainly an internet troll, _ancilla the supremacist_ has become somewhat of a joke in my environment, so I guess it has served its purpose.
 
 
 ## Simulating Quantum Processes
 One side of the discussion is determining which quantum processes can be efficiently simulated
 by a classical computer.
-We recently had Hakop Pashayan vist QuICS, who revealed to us some of the intricacies involved in
-this process.
+We recently had Hakop Pashayan vist QuICS,
+who revealed to us some of the intricacies involved in this line of research.
 In their paper Hakop et al. explain the concept of ε-simulation[^hakop1].
 For any quantum circuit $\mathcal C$ there exists some probability distribution $\mathcal P_\mathcal C$ over the outcomes $X=(X_1, X_2, …, X_k)$,
 which is just a classical random variable.
@@ -46,11 +45,15 @@ Or in other words, what is $\mathcal P(X_0 = 1, X_1 = 0)$?
 An algorithm that can produce the answer to this (and similar) questions is called a _strong simulator_.
 This is quite a powerful notion, since it is more powerful than a theoretical quantum computer
 which can only produce a sample from the output distribution.
-A slightly weaker notions is that of _weak simulation_:
+A slightly weaker notion is that of _weak simulation_:
+instead of the exact probability
 output a sample in accordance with the output distribution $\mathcal P_\mathcal C$.
 Even constructing a _weak simulator_ is probably too lofty of a goal,
 because no real quantum computer will be completely noiseless
 and thus cannot sample exactly from $\mathcal P_\mathcal C$.
+It is therefore maybe unreasonable to expect a classical computer to do either of these
+(except for simple circuits)
+and we will instead define $\epsilon$-simulation that relaxes the constraints further.
 
 ![A general quantum circuit]({{ site.url }}/img/quantum-simulation-circuit.svg)\\
 _A general quantum circuit, with $n$ product state inputs, a unitary evolution,
@@ -59,21 +62,20 @@ and then measurements on $k$ of the qubits._
 
 ### ε-Simulation
 Hakop et al. introduce the notion of ε-simulation,
-which allows the simulator to make some ε-sized error in the $L_1$ distance.
+which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
 
-**Definition:** $L_1$ norm of discrete probability distributions
-: For a discrete probability distribution $\mathcal P$ the $L_1$ norm is defined as
+**Definition:** $\ell_1$ norm and distance for vectors 
+: For a vector $\mathbb v$ the $\ell_1$ norm is defined as
 
-  $$\norm{\mathcal P}_1 = \sum_{i \in \mathcal P} \mathcal{P}(i).$$
+  $$\norm{\mathbb v}_1 = \sum_{i \in \mathbb v} \abs{\mathbb v(i)}.$$
 
-
-  The $L_1$ distance between two discrete probability distributions $\mathcal P$ and $\mathcal Q$
-  is then
+  The $\ell_1$ distance between two discrete probability distributions $\mathcal P$ and $\mathcal Q$
+  (that are just vectors in some respects) is then
   
-  $$\norm{\mathcal{P} - \mathcal{Q}}_1 = \sum_{i ∈ P} \mathcal P(i) - \mathcal Q(i)$$
+  $$\norm{\mathcal{P} - \mathcal{Q}}_1 = \sum_{i ∈ P} \abs{\mathcal P(i) - \mathcal Q(i)}$$
 
-  which just takes the vector difference of the two probability distributions.
-  (This notion also generalises to other norms, such as the $L_2$ norm and $L_\infty$ norm.)
+  which just takes the absolute vector difference of the two probability distributions.
+  (This notion also generalises to other norms, such as the $\ell_2$ norm and $\ell_\infty$ norm.)
 
 **Definition:** ε-sampling [^hakop1]
 : Let $\mathcal P$ be a discrete probability distribution.
@@ -155,7 +157,7 @@ Then, there exists an $\epsilon$-simulator of $\mathcal C$."
 *Proof*: Let $a \in \Sigma^*$ and $\epsilon > 0$.
 From the poly-box for all $S \in \set{0,1,\bullet}^n$ over the circuit family $\mathcal C$
 we have a polynomial-time algorithm to efficiently estimates probabilities from the probability distribution $P_a(S)$.
-Using the poly-box construction above it is also possible to efficiently estimate probabilities from the $\epsilon$-close (in $L_1$ distance) distribution $P^\epsilon_a(S)$.
+Using the poly-box construction above it is also possible to efficiently estimate probabilities from the $\epsilon$-close (in $\ell_1$ distance) distribution $P^\epsilon_a(S)$.
 And because of poly-sparsity of $\mathcal C$ there exists a $P^\epsilon_a$
 with a polynomial upper bound $t = O\left(\text{poly}(\epsilon^{-1})\right)$
 on relevant outputs.
