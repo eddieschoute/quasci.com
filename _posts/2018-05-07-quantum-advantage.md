@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Classical vs Quantum Computation
-date:       2018-03-12 16:38:05
+date:       2018-05-12 16:38:05
 summary:    ThinkQ conference experience
 categories: conference algorithms advantage
 ---
