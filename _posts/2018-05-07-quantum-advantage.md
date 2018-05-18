@@ -1,13 +1,15 @@
 ---
 layout:     post
 title:      Classical vs Quantum Computation
-date:       2018-03-12 16:38:05
-summary:    ThinkQ conference experience
-categories: conference algorithms advantage
+date:       2018-05-07 16:38:05
+summary:    It is believed that quantum computers provide some advantage over classical computers,
+    but do they really? We will look at both closing the gap between classical and quantum
+    and at solidifying it.
+categories: algorithms advantage complexity
 ---
 
 The IBM ThinkQ conference was held recently in New York with a focus on near-term quantum computing applications.
-It seems that businesses that businesses have successfully been developing larger quantum computers
+It seems that businesses have successfully been developing larger quantum computers
 ---we're at around 50 qubits now!--- but are now looking for the "killer app" of small quantum computers.
 There were some variations on the "what to do with your quantum computer" theme
 and I will talk about some of the applications that were discussed.
@@ -17,24 +19,21 @@ All talks and recordings of them are available at the [online schedule](https://
 A _quantum advantage_ refers to some applications where a quantum computer performs some computation
 that a classical computer currently cannot perform.
 Previously known as _quantum supremacy_, it has now been renamed after an internal discussion
-within the community about its political correctness.
-See e.g. one of the most heated [discussions](https://scirate.com/arxiv/1705.06768) I've seen on Scirate,
-which also touches on the Latin origin of the term _ancilla_ ("housemaid", colloquially: helper qubit).
-While almost certainly an internet troll, _ancilla the supremacist_ has become somewhat of a joke in my environment,
-so I guess it has served its purpose.
+within the community about its political correctness[^supremacydiscussion].
 
 So far we actually do not know unconditionally if quantum computing is actually more powerful than classical
 (i.e. $BQP \not\subseteq BPP$).
 But through the problems of Boson Sampling[^boson1] and Instantaneous Quantum Polynomial-time (IQP) circuits[^iqp1]
 we do know that the polynomial hierarchy ($PH$) must collapse if classical computers can solve them efficiently.
-(Simulation and visitor (Hakop)
+
+[^supremacydiscussion]: See e.g. one of the most heated [discussions](https://scirate.com/arxiv/1705.06768) I've seen on Scirate, which also touches on the Latin origin of the term _ancilla_ ("housemaid", colloquially: helper qubit). While almost certainly an internet troll, _ancilla the supremacist_ has become somewhat of a joke in my environment, so I guess it has served its purpose.
 
 
 ## Simulating Quantum Processes
 One side of the discussion is determining which quantum processes can be efficiently simulated
 by a classical computer.
-We recently had Hakop Pashayan vist QuICS, who revealed to us some of the intricacies involved in
-this process.
+We recently had Hakop Pashayan vist QuICS,
+who revealed to us some of the intricacies involved in this line of research.
 In their paper Hakop et al. explain the concept of ε-simulation[^hakop1].
 For any quantum circuit $\mathcal C$ there exists some probability distribution $\mathcal P_\mathcal C$ over the outcomes $X=(X_1, X_2, …, X_k)$,
 which is just a classical random variable.
@@ -46,11 +45,15 @@ Or in other words, what is $\mathcal P(X_0 = 1, X_1 = 0)$?
 An algorithm that can produce the answer to this (and similar) questions is called a _strong simulator_.
 This is quite a powerful notion, since it is more powerful than a theoretical quantum computer
 which can only produce a sample from the output distribution.
-A slightly weaker notions is that of _weak simulation_:
+A slightly weaker notion is that of _weak simulation_:
+instead of the exact probability
 output a sample in accordance with the output distribution $\mathcal P_\mathcal C$.
 Even constructing a _weak simulator_ is probably too lofty of a goal,
 because no real quantum computer will be completely noiseless
 and thus cannot sample exactly from $\mathcal P_\mathcal C$.
+It is therefore maybe unreasonable to expect a classical computer to do either of these
+(except for simple circuits)
+and we will instead define $\epsilon$-simulation that relaxes the constraints further.
 
 ![A general quantum circuit]({{ site.url }}/img/quantum-simulation-circuit.svg)\\
 _A general quantum circuit, with $n$ product state inputs, a unitary evolution,
@@ -59,21 +62,20 @@ and then measurements on $k$ of the qubits._
 
 ### ε-Simulation
 Hakop et al. introduce the notion of ε-simulation,
-which allows the simulator to make some ε-sized error in the $L_1$ distance.
+which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
 
-**Definition:** $L_1$ norm of discrete probability distributions
-: For a discrete probability distribution $\mathcal P$ the $L_1$ norm is defined as
+**Definition:** $\ell_1$ norm and distance for vectors 
+: For a vector $\mathbf v$ the $\ell_1$ norm is defined as
 
-  $$\norm{\mathcal P}_1 = \sum_{i \in \mathcal P} \mathcal{P}(i).$$
+  $$\norm{\mathbf v}_1 = \sum_{i \in \mathbf v} \abs{\mathbf v(i)}.$$
 
-
-  The $L_1$ distance between two discrete probability distributions $\mathcal P$ and $\mathcal Q$
-  is then
+  The $\ell_1$ distance between two discrete probability distributions $\mathcal P$ and $\mathcal Q$
+  (that are just vectors in some respects) is then
   
-  $$\norm{\mathcal{P} - \mathcal{Q}}_1 = \sum_{i ∈ P} \mathcal P(i) - \mathcal Q(i)$$
+  $$\norm{\mathcal{P} - \mathcal{Q}}_1 = \sum_{i ∈ P} \abs{\mathcal P(i) - \mathcal Q(i)}$$
 
-  which just takes the vector difference of the two probability distributions.
-  (This notion also generalises to other norms, such as the $L_2$ norm and $L_\infty$ norm.)
+  which just takes the absolute vector difference of the two probability distributions.
+  (This notion also generalises to other norms, such as the $\ell_2$ norm and $\ell_\infty$ norm.)
 
 **Definition:** ε-sampling [^hakop1]
 : Let $\mathcal P$ be a discrete probability distribution.
@@ -84,6 +86,8 @@ which allows the simulator to make some ε-sized error in the $L_1$ distance.
 
 With the definition of ε-sampling, we can say that an algorithm can ε-simulate a quantum circuit $\mathcal C$
 if it can ε-sample from the associated probability distribution $\mathcal P_\mathcal C$.
+Basically, an $\epsilon$-simulator is a weak simulator of a probability distribution that is
+$\epsilon$-close to the real probability distribution.
 A result of Hakop et al.[^hakop1] is that an ε-simulator of $\mathcal C$ is indistinguishable from
 $\mathcal C$ and also is efficient due to the polynomial run-time constraints.
 Not only that, but it is also _necessary_ to be an ε-simulator for any kind of simulation scheme
@@ -92,35 +96,41 @@ to be efficient and indistinguishable from $\mathcal C$[^hakopscenario].
 
 ### Poly-Boxes and Simulations
 To be able to ε-simulate a circuit $\mathcal C$ it is first necessary to estimate the probabilities
-for some outcomes of the its output probability distribution $\mathcal P_\mathcal C$.
+for some outcomes of its output probability distribution $\mathcal P_\mathcal C$.
 A _poly-box_ is a metaphorical device that estimates such probabilities in polynomial time.
 It is (presumably) not possible to efficiently estimate probabilities for general quantum circuits using 
 a classical computer, but it may be possible to construct poly-boxes for certain restricted circuit
 families.
 
 **Definition:** Poly-box
-: Given is a family of quantum circuits $\mathbb S = \set{\mathcal C_a \middle| a ∈ Σ^\*}$
-with the associated family of probability distributions
-$\mathbb P = \set{\mathcal P_\mathcal C \middle| \mathcal C ∈ \mathbb S}$
-for $Σ$ some finite alphabet.
+: Given is a finite alphabet $\Sigma$,
+let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
+Then $\Sigma^\*$ defines a family of quantum circuits
+$\mathbb S = \set{\mathcal C_a \middle| a ∈ Σ^\*}$.
+The associated family of probability distributions be
+$\mathbb P = \set{\mathcal P_\mathcal C \middle| \mathcal C ∈ \mathbb S}$.\\
+We want to be able to estimate probabilities for output strings $S ∈ \set{0,1,\bullet}^{n+1}$
+with a "$\bullet$" meaning "don't care", $0$ or $1$ are both fine.
 Then a poly-box is a classical algorithm that can estimate $\mathcal P(S)$
-for all $\mathcal P ∈ \mathbb P$,
-output strings $S ∈ \set{0,1,\bullet}^{n+1}$ with "$\bullet$" a "don't care",
-number of samples $s ∈ ℕ$ efficiently in $s$ and the number of qubits $n$.
+for all $\mathcal P ∈ \mathbb P$
+efficiently in the number of samples $s \in \mathbb N$ and the number of qubits $n$.
 
 Circuit families must admit a poly-box to be ε-simulable,
 but it is not sufficient.
-There is a fairly simple example of a circuit that does admit a poly-box
+We will give a fairly simple example of a circuit that does admit a poly-box
 but does not admit an ε-simulator (unless $BQP ⊆ BPP$).
 Let us define a circuit $\mathcal C_e$ that takes in some quantum circuit description $a ∈ Σ^\*$.
-The circuit $\mathcal C_e$ samples a single bit from the quantum circuit $\mathcal C_a$.
-Note that efficiently producing this single bit clasically
-is already hard for universal quantum circuits!
+The circuit $\mathcal C_e$ samples a single bit $X$ from the quantum circuit
+described by $a$: $\mathcal C_a$.
+Note that for general quantum circuits it
+is already hard to efficiently produce this single bit clasically!
 Finally, $\mathcal C_e$ samples a uniform string $Y ∈ \set{0,1}^n$ and outputs
-$(X ⊕ \text{Parity}(Y), Y) ∈ \set{0,1}^{n+1}$.
+$(X ⊕ \text{Parity}(Y), Y) ∈ \set{0,1}^{n+1}$.[^parityandxor]
 Basically, we are obfuscating the hard-to-produce $X$ with a uniform $Y$,
 but given the entire output it is easy to figure out $X$.
 (Compute Parity$(Y)$ and XOR that together with the first output bit.)
+
+[^parityandxor]: $\text{Parity}(Y) = 1$ iff the number of ones in $Y$ is even. $\oplus$ is the exclusive or.
 
 The real kicker, however, is that $C_e$ is not ε-simulable,
 because if it were then it would be possible to sample $X$ (and that's hard).
@@ -129,7 +139,7 @@ But it is actually easy to construct a poly-box for $C_e$ for any given error $0
 1. If there are $0<k≤n+1$ "don't cares" in the string $S ∈ \set{0,1,\bullet}^{n+1}$
 for which we need to estimate the probability $\mathcal P(S)$ then output $1/2^{n+1-k}$ as a guess.
 1. Otherwise, if $ε < 1/2^n$ then explicitly compute the quantum probability $p=P(X=1)$.
-This will take time $O(1/2^n) ⊆ O(ε^{-1})$ so it is still efficient in $ε^{-1}$.
+This will take time $O(2^n) ⊆ O(ε^{-1})$ so it is still efficient in $ε^{-1}$.
 1. Large ε: if $ε ≥ 1/2^n$ simply output $p=1/2^{n+1}$ as a guess.
 
 Now through some straightforward computation you can show that in all three cases
@@ -137,14 +147,12 @@ this does meet the requirements of a poly-box as it is sufficiently close to the
 The problem here is that we have thinned the probability of any one string occurring so much
 that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
 
-If we have another condition which assures us that there are only a few relevant outputs,
-i.e. the outputs are _sparse_,
-then if there exists a poly-box we can ε-simulate the circuit family.
-The _poly-sparsity_ of discrete probability distributions and families is sufficient,
-that is (roughly),
-there must be some polynomial upper bound in the error $ε^{-1}$
-and size of the string $n$,
-$O\left(\text{poly}(n/ε)\right)$, on the number of relevant outputs.
+A poly-box with the additional condition that there are only a few relevant outputs
+(i.e. the output space is _sparse_)
+ opens up the possibility of ε-simulating the circuit family.
+More precisely, that condition is the _poly-sparsity_ of the discrete probability distributions on the outputs.
+Roughly, there must be a polynomially-sized upper bound on the number of relevant outputs of
+$O\left(\text{poly}(n/\epsilon)\right)$ with $n$ the size of the input string and $ε$ the error.
 An output is relevant if it has a larger probability mass than ε.
 
 **Theorem 1**[^hakop1] : "Let $\mathcal C$ be a family of quantum circuits with corresponding probability
