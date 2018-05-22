@@ -122,8 +122,8 @@ but does not admit an ε-simulator (unless $BQP ⊆ BPP$).
 Let us define a circuit $\mathcal C_e$ that takes in some quantum circuit description $a ∈ Σ^\*$.
 The circuit $\mathcal C_e$ samples a single bit $X$ from the quantum circuit
 described by $a$: $\mathcal C_a$.
-Note that for general quantum circuits it
-is already hard to efficiently produce this single bit clasically!
+(Note that for general quantum circuits it
+is already hard to efficiently produce this single bit clasically!)
 Finally, $\mathcal C_e$ samples a uniform string $Y ∈ \set{0,1}^n$ and outputs
 $(X ⊕ \text{Parity}(Y), Y) ∈ \set{0,1}^{n+1}$.[^parityandxor]
 Basically, we are obfuscating the hard-to-produce $X$ with a uniform $Y$,
@@ -147,13 +147,19 @@ this does meet the requirements of a poly-box as it is sufficiently close to the
 The problem here is that we have thinned the probability of any one string occurring so much
 that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
 
-A poly-box with the additional condition that there are only a few relevant outputs
-(i.e. the output space is _sparse_)
- opens up the possibility of ε-simulating the circuit family.
-More precisely, that condition is the _poly-sparsity_ of the discrete probability distributions on the outputs.
-Roughly, there must be a polynomially-sized upper bound on the number of relevant outputs of
-$O\left(\text{poly}(n/\epsilon)\right)$ with $n$ the size of the input string and $ε$ the error.
-An output is relevant if it has a larger probability mass than ε.
+If, instead, there are only a polynomial number of outputs with significant probability
+then we can $\epsilon$-simulate like we would want to.
+We say that such output distributions are _poly-sparse_.
+More specifically, there must be a polynomially-sized upper bound on the number of relevant outputs of
+$t = O\left(\text{poly}(n/\epsilon)\right)$ with $n$ the size of the input string and $ε$ the error.
+Given $t$, it must then be possible to construct a distribution $\mathcal P^\epsilon$ with only $t$ outputs with non-zero probabilty such that
+
+$$\norm{\mathcal P - \mathcal P^\epsilon}_1 \leq \epsilon .$$
+
+With a poly-box for $\mathcal C$ we can now estimate the $t$ relevant probabilities
+and explicitly reconstruct the approximate distribution $\mathcal P^\epsilon$.
+This distribution $\mathcal P^\epsilon$ is $\epsilon$-close to the real output distribution $\mathcal P_{\mathcal C}$
+and thus suffices for $\epsilon$-simulation of $\mathcal C$.
 
 **Theorem 1**[^hakop1] : "Let $\mathcal C$ be a family of quantum circuits with corresponding probability
 distributions $\mathbb P$.
@@ -256,9 +262,8 @@ Let $L \in \text{Post-}IQP$ decided by a post-selected circuit family $\set{C_w}
 with post-selection wires $\mathcal P_w$ and output wire $\mathcal O_w$.
 From our definition of $\text{Post-}IQP$ we have
 
-$$\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \begin{cases}
-\geq 1 - \epsilon & \text{if $x\in L$},\\
-\leq \epsilon & \text{if $x\not\in L$}.
+$$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq 1 - \epsilon & \text{if $x\in L$},\\
+\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq \epsilon & \text{if $x\not\in L$}.
 \end{cases}$$
 
 for some $0 < \epsilon < 1/2$.
