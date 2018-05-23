@@ -200,52 +200,56 @@ but there is multitude of approaches that may be covered in later blog posts.
 An approach to showing a quantum advantage referred to as IQP is
 to perform a diagonal unitary in the $X$-basis on an input in the Hadamard basis ($\ket +, \ket -$).
 Alternatively, we could describe a unitary $D$ diagonal in the $Z$-basis
-and conjugate with $H^{\otimes n}$,
-thus we get $\mathcal C_w = H^{\otimes n} D_w H^{\otimes n}$ for some string $w \in \Sigma^{\*}$
+and conjugate with $H^{\otimes n}$.
+A string $w \in \Sigma^{\*}$ then describes the diagonal elements of $D_w$ for  the circuit
+
+$$\mathcal C_w = H^{\otimes n} D_w H^{\otimes n}$$
+
 where the language $\Sigma^{\*}$ describes circuits in the family $\set{C_w}$.
 This turns out to be difficult to simulate for classical computers under suitable hardness assumptions [^iqpnoise].
-We will show the main result from [^iqp1]: If it is possible weakly classically simulate
-IQP circuits to within multiplicative error,
+We will show the main result from [^iqp1]:
+If it is possible to weakly classically simulate IQP circuits to within a constant multiplicative factor,
 then the Polynomial Hierarchy would collapse to the third level.
 
 The Polynomial Hierarchy is an infinite hierarchy of complexity classes
 of increasing computational power.
 It uses the notion of an _oracle_,
 a black box that can be queried in one time step for an answer in its complexity class.
-For complexity classes $A$ and $B$ we have that $A^B$ is an algorithm in $A$
+For complexity classes $A$ and $B$, we have that $A^B$ is an algorithm in $A$
 with access to an oracle for $B$,
 i.e. it can decide any language in $B$ by querying the oracle in one time step.
 Now let the polynomial hierarchy be defined as
 $\Delta_{k+1} = P^{N\Delta_k}$, with $\Delta_1 = P$ and $N\Delta_k$ the nondeterministic class
 associated to $\Delta_k$ (like $NP$ is associated to $P$).
-It is know that if $\Delta_i = \Delta_{i+1}$ for some $i$ then $\Delta_i = \Delta_j$ for all $j > i$.
-This is usually referred to as a collapse of the polyomial hierarchy to the $i$-th level.
+It is known that if $\Delta_i = \Delta_{i+1}$ for some $i$ then $\Delta_i = \Delta_j$ for all $j > i$.
+This is usually referred to as a _collapse of the polynomial hierarchy_ to the $i$-th level.
 Such a collapse is not expected to be the case
 and is often likened to $P = NP$ (a collapse to the first level)
 though less extreme.
 
 Another notion that we need is post-selection.
-We can view this as running a probabilistic circuit and asserting that the outcomes on
+We can view this as running a probabilistic circuit multiplicative and asserting that the outcomes on
 the post-selected wires will all be zero before looking at the output wires.
-This is of course not a natural assumption, since if you were to run the circuit
+This is of course not a natural assumption, since, if you were to run the circuit,
 you are in no way guaranteed that the outputs on those wires will be zero.
-Nonetheless, it is a useful notion as we will see later.
+Nonetheless, it is a useful notion, as we will see later.
 But first let us define post-selected circuits more formally.
 
 **Definition:** Post-selected Complexity Classes[^iqp1]
 : A language $L$ is in $\text{Post-}A$ for complexity class $A$ (either $BPP$, $BQP$, or $IQP$)
 if and only if there is an error tolerance $0 < \epsilon < 1/2$
 and a family of circuits ${\mathcal C_w}$ of post-selected $A$ circuits
-with outputs $\mathcal O_w$ and post-selection wires $\mathcal P_w$ such that
+with output $\mathcal O_w$ and post-selection wires $\mathcal P_w$ such that
 * if $w \in L$ then $\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$ and
 * if $w \not\in L$ then $\Pr\left[\mathcal O_w = 0 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$.
 
 It is known that $\text{Post-}BPP \subseteq \Delta_3$.
-Because $P^{P^C} = P^C$ we have
+And from $P^{P^A} = P^A$ we have
 
 $$P^{\text{Post-}BPP} \subseteq P^{\Delta_3} = \Delta_3.$$
 
 Furthermore by results of Aaronson and Toda's Theorem we get
+that post-selected quantum decision problems contain the entire polynomial hierarchy, i.e
 
 $$PH \subseteq P^{\text{Post-}BQP}.$$
 
