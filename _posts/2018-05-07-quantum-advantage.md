@@ -221,7 +221,7 @@ i.e. it can decide any language in $B$ by querying the oracle in one time step.
 Now let the polynomial hierarchy be defined as
 $\Delta_{k+1} = P^{N\Delta_k}$, with $\Delta_1 = P$ and $N\Delta_k$ the nondeterministic class
 associated to $\Delta_k$ (like $NP$ is associated to $P$).
-It is known that if $\Delta_i = \Delta_{i+1}$ for some $i$ then $\Delta_i = \Delta_j$ for all $j > i$.
+It is known that if $\Delta_i = \Delta_{i+1}$ for some $i$ then $\Delta_i = \Delta_j$ for all $j > i$.[^aurorabarak]
 This is usually referred to as a _collapse of the polynomial hierarchy_ to the $i$-th level.
 Such a collapse is not expected to be the case
 and is often likened to $P = NP$ (a collapse to the first level)
@@ -243,7 +243,7 @@ with output $\mathcal O_w$ and post-selection wires $\mathcal P_w$ such that
 * if $w \in L$ then $\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$ and
 * if $w \not\in L$ then $\Pr\left[\mathcal O_w = 0 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$.
 
-It is known that $\text{Post-}BPP \subseteq \Delta_3$.
+It is known that $\text{Post-}BPP \subseteq \Delta_3$.[^han]
 And from $P^{P^A} = P^A$ we have
 
 $$P^{\text{Post-}BPP} \subseteq P^{\Delta_3} = \Delta_3.$$
@@ -254,12 +254,13 @@ that post-selected quantum decision problems contain the entire polynomial hiera
 $$PH \subseteq P^{\text{Post-}BQP}.$$
 
 Bremner, Jozsa and Shepherd[^iqp1] showed that $\text{Post-}IQP = \text{Post-}BQP$.
-We will then show that if $IQP$ circuits could be weakly simulated we will also show this implies
-$\text{Post-}BPP = \text{Post-}BQP$
+We will show that if $IQP$ circuits could be weakly simulated
+and that this implies
+$\text{Post-}IQP \subseteq = \text{Post-}BPP$,
 thus resulting in a collapse of the Polynomial Hierarchy to the third level.
 
 **Theorem 2:** If the output distributions of families of $IQP$ circuits could be weakly simulated
-to within multiplicative error $1\leq c < \sqrt{2}$ then $\text{Post-}BPP = \text{Post-}BQP$.
+to within multiplicative error $1\leq c < \sqrt{2}$, then $\text{Post-}IQP \subseteq \text{Post-}BPP$.
 
 *Proof:*
 Let $L \in \text{Post-}IQP$ decided by a post-selected circuit family $\set{C_w}$
@@ -272,42 +273,39 @@ $$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\r
 
 for some $0 < \epsilon < 1/2$.
 Now let $\mathcal Y_w$ be all $m$ output wires of $\mathcal C_w$.
-We assumed that there exists a classical randomize weak simulator of $\mathcal C_w$
-called $\widetilde{\mathcal C_w}$,
-with associated output wires $\widetilde{\mathcal O_w}$ and $\widetilde{\mathcal P_w}$,
-such that we can weakly sample from the approximate $\widetilde{\mathcal Y_w}$ with
+We assumed that there exists a classical randomized weak simulator of $\mathcal C_w$
+called $\widetilde{\mathcal C}_w$,
+with associated output wires $\widetilde{\mathcal Y}_w$ such that
 
 $$\frac{1}{c} \Pr\left[\mathcal Y_w = y_1\ldots y_m\right]
-\leq \Pr\left[\widetilde{\mathcal Y_w} = y_1\ldots y_m\right]
-\leq c \Pr\left[\mathcal Y_w = y_1 \ldots y_m\right]$$
+\leq \Pr\left[\widetilde{\mathcal Y}_w = y_1\ldots y_m\right]
+\leq c \Pr\left[\mathcal Y_w = y_1 \ldots y_m\right].$$
 
-for a multiplicative error $c$.
-This also holds for any subsets of registers of $\widetilde{\mathcal Y_w}$
-such as $\widetilde{\mathcal O_w}$ and $\widetilde{\mathcal P_w}$.
-Now we have by Born's rule
+This also holds for any subsets of registers of $\widetilde{\mathcal Y}_w$
+such as the output wire $\widetilde{\mathcal O}_w$ and post-selection wires $\widetilde{\mathcal P}_w$.
+Now we have for $x \in \set{0,1}$
 
-$$\Pr\left[\widetilde{\mathcal O_w} = 0 \middle\vert \widetilde{\mathcal P_w} = 0 \ldots 0\right]
-= \frac{\Pr\left[\widetilde{\mathcal O_w} = 0 \land \widetilde{\mathcal P_w} = 0 \ldots 0\right]}{\Pr\left[\widetilde{\mathcal P_w} = 0 \ldots 0\right]}\\
-\leq c^2 \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right]$$
+$$\Pr\left[\widetilde{\mathcal O}_w = x \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right]
+= \frac{\Pr\left[\widetilde{\mathcal O}_w = x \land \widetilde{\mathcal P}_w = 0 \ldots 0\right]}{\Pr\left[\widetilde{\mathcal P}_w = 0 \ldots 0\right]}\\
+\leq c^2 \Pr\left[\mathcal O_w = x \middle\vert \mathcal P_w = 0\ldots 0\right], $$
 
 and a similar calculation shows
 
-$$\frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right]
-\leq \Pr\left[\widetilde{\mathcal O_w} = 0 \middle\vert \widetilde{\mathcal P_w} = 0 \ldots 0\right].$$
+$$\Pr\left[\widetilde{\mathcal O}_w = x \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = x \middle\vert \mathcal P_w = 0\ldots 0\right].$$
 
-We have
+We combine these two results and fill in $x=1$, together with the first equation in the proof, to get
 
 $$\begin{cases}
-w\in L: \Pr\left[\widetilde{O_w} = 1 \middle\vert \widetilde{P_w} = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-\epsilon\right)\\
-w\not \in L: \Pr\left[\widetilde{O_w} = 1 \middle\vert \widetilde{P_w} = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 \epsilon\\
+w\in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-\epsilon\right)\\
+w\not \in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 \epsilon\\
 \end{cases}.$$
 
 We just need to adjust $c$ to make sure that $L$ can be decided in $\text{Post-}BPP$:
-I.e. there is constant-sized gap between $w\in L$ and $w\not \in L$ decisions
-and we decide correctly more often than not.
+It must decide correctly more often than not,
+and there needs to be constant-sized gap between $w\in L$ and $w\not \in L$ decisions,
 So we get $1/c^2 (1-\epsilon) > 1/2$ for $w \in L$, leading to $c^2/2 < 1-\epsilon$.
-Since $0 < \epsilon < 1/2$ we have that $1 \leq c < \sqrt{2}$ suffices
-to show $L \in \text{Post-}BPP$.$\square$
+Since $0 < \epsilon < 1/2$, we have that $1 \leq c < \sqrt{2}$ meets these constraints
+and are sufficient to show that $L \in \text{Post-}BPP$.$\square$
 
 The main result follows directly from the previous Theorem and facts stated directly prior to it.
 
@@ -342,6 +340,9 @@ what it means to have a _quantum advantage_.
 [^boson1]: Aaronson, Scott, and Alex Arkhipov. "The computational complexity of linear optics." Proceedings of the forty-third annual ACM symposium on Theory of computing. ACM, 2011. {% include doi.html doi='10.1145/1993636.1993682' %}
 [^iqp1]: Bremner, Michael J., Richard Jozsa, and Dan J. Shepherd. "Classical simulation of commuting quantum computations implies collapse of the polynomial hierarchy." Proceedings of the Royal Society of London A: Mathematical, Physical and Engineering Sciences. The Royal Society, 2010. {% include doi.html doi='10.1098/rspa.2010.0301' %}
 [^iqpnoise]: Bremner, Michael J., Ashley Montanaro, and Dan J. Shepherd. "Achieving quantum supremacy with sparse and noisy commuting quantum computations." Quantum 1 (2017): 8. {% include doi.html doi='10.22331/q-2017-04-25-8' %}
+[^aurorabarak]: Arora, Sanjeev, and Boaz Barak. Computational complexity: a modern approach. Cambridge University Press, 2009.
+[^han]: Han, Yenjo, Lane A. Hemaspaandra, and Thomas Thierauf. "Threshold computation and cryptographic security." SIAM Journal on Computing 26.1 (1997): 59-78. {% include doi.html doi='10.1137/S0097539792240467' %}
+
 
 
 ## Conclusion
