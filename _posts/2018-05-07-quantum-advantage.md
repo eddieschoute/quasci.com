@@ -109,11 +109,11 @@ a classical computer, but it may be possible to construct poly-boxes for certain
 families.
 
 **Definition:** Poly-box
-: Given is a finite alphabet $\Sigma$,
-let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
+: Given is a finite alphabet $\Sigma$.
+Let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
 Then $\Sigma^\*$ defines a family of quantum circuits
 $\mathbb S = \set{\mathcal C_a \middle| a ∈ Σ^\*}$.
-The associated family of probability distributions be
+The associated family of probability distributions is
 $\mathbb P = \set{\mathcal P_\mathcal C \middle| \mathcal C ∈ \mathbb S}$.\\
 We want to be able to estimate probabilities for output strings $S ∈ \set{0,1,\bullet}^{n+1}$
 with a "$\bullet$" meaning "don't care", $0$ or $1$ are both fine.
@@ -129,7 +129,7 @@ Let us define a circuit $\mathcal C_e$ that takes in some quantum circuit descri
 The circuit $\mathcal C_e$ samples a single bit $X$ from the quantum circuit
 described by $a$: $\mathcal C_a$.
 (Note that for general quantum circuits it
-is already hard to efficiently produce this single bit clasically!)
+is already hard to efficiently produce this single bit classically!)
 Finally, $\mathcal C_e$ samples a uniform string $Y ∈ \set{0,1}^n$ and outputs
 $(X ⊕ \text{Parity}(Y), Y) ∈ \set{0,1}^{n+1}$.[^parityandxor]
 Basically, we are obfuscating the hard-to-produce $X$ with a uniform $Y$,
@@ -148,7 +148,7 @@ for which we need to estimate the probability $\mathcal P(S)$ then output $1/2^{
 This will take time $O(2^n) ⊆ O(ε^{-1})$ so it is still efficient in $ε^{-1}$.
 1. Large ε: if $ε ≥ 1/2^n$ simply output $p=1/2^{n+1}$ as a guess.
 
-Now through some straightforward computation you can show that in all three cases
+Now, through some straightforward computation, you can show that in all three cases
 this does meet the requirements of a poly-box as it is sufficiently close to the real $P(S)$.
 The problem here is that we have thinned the probability of any one string occurring so much
 that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
@@ -315,7 +315,7 @@ and are sufficient to show that $L \in \text{Post-}BPP$.$\square$
 
 The main result follows directly from the previous Theorem and facts stated directly prior to it.
 
-**Corrolary 3:**
+**Corollary 3:**
 If there is a weak simulator of families of $IQP$ circuits to within
 multiplicative error $1 \leq c < \sqrt{2}$ then
 the Polynomial Hierarchy would collapse to the third level.
