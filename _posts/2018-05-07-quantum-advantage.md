@@ -86,7 +86,8 @@ which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
 
 ![Epsilon-close probability distribution]({{ site.url }}/img/epsilon-close-probability.svg)\\
 _On the left is the original probability distribution $\mathcal P$.
-On the right we have approximated $\mathcal P$ by an $\epsilon$-close distribution that is sparser We have less nonzero entries._
+On the right we have approximated $\mathcal P$ by an $\epsilon$-close distribution that is sparser:
+We have less nonzero entries._
 {:.center}
 
 With the definition of ε-sampling, we can say that an algorithm can ε-simulate a quantum circuit $\mathcal C$
