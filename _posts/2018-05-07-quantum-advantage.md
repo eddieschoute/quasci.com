@@ -84,6 +84,11 @@ which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
   $\norm{\mathcal P - \mathcal P^ε}_1 ≤ ε$.
   In addition, its run-time should scale polynomially in $1/ε$.
 
+![Epsilon-close probability distribution]({{ site.url }}/img/epsilon-close-probability.svg)\\
+_On the left is the original probability distribution $\mathcal P$.
+On the right we have approximated $\mathcal P$ by an $\epsilon$-close distribution that is sparser We have less nonzero entries._
+{:.center}
+
 With the definition of ε-sampling, we can say that an algorithm can ε-simulate a quantum circuit $\mathcal C$
 if it can ε-sample from the associated probability distribution $\mathcal P_\mathcal C$.
 Basically, an $\epsilon$-simulator is a weak simulator of a probability distribution that is
