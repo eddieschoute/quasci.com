@@ -153,17 +153,19 @@ this does meet the requirements of a poly-box as it is sufficiently close to the
 The problem here is that we have thinned the probability of any one string occurring so much
 that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
 
-If, instead, there are only a polynomial number of outputs with significant probability
+If, instead, the circuit has only a polynomial number of outcomes with significant probability
 then we can $\epsilon$-simulate like we would want to.
-We say that such output distributions are _poly-sparse_.
-More specifically, there must be a polynomially-sized upper bound on the number of relevant outputs of
+We say that such outcome distributions are _poly-sparse_.
+More specifically, there must be a polynomially-sized upper bound on the number of relevant outcomes of
 $t = O\left(\text{poly}(n/\epsilon)\right)$ with $n$ the size of the input string and $ε$ the error.
-Given $t$, it must then be possible to construct a distribution $\mathcal P^\epsilon$ with only $t$ outputs with non-zero probabilty such that
+Given poly-sparsity and the parameter $t$,
+we can construct a distribution $\mathcal P^\epsilon$
+with only $t$ outcomes with non-zero probabilty such that
 
 $$\norm{\mathcal P - \mathcal P^\epsilon}_1 \leq \epsilon .$$
 
-With a poly-box for $\mathcal C$ we can now estimate the $t$ relevant probabilities
-and explicitly reconstruct the approximate distribution $\mathcal P^\epsilon$.
+With a poly-box for $\mathcal C$ we can estimate the $t$ relevant outcomes
+and _explicitly_ reconstruct $\mathcal P^\epsilon$.
 This distribution $\mathcal P^\epsilon$ is $\epsilon$-close to the real output distribution $\mathcal P_{\mathcal C}$
 and thus suffices for $\epsilon$-simulation of $\mathcal C$.
 
@@ -173,9 +175,12 @@ Supose there exists an efficient  poly-box over $\mathcal C$, and $\mathbb P$ is
 Then, there exists an $\epsilon$-simulator of $\mathcal C$."
 
 *Proof*: Let $a \in \Sigma^*$ and $\epsilon > 0$.
-From the poly-box for all $S \in \set{0,1,\bullet}^n$ over the circuit family $\mathcal C$
-we have a polynomial-time algorithm to efficiently estimates probabilities from the probability distribution $P_a(S)$.
-Using the poly-box construction above it is also possible to efficiently estimate probabilities from the $\epsilon$-close (in $\ell_1$ distance) distribution $P^\epsilon_a(S)$.
+The poly-box over the circuit family $\mathcal C$
+allows us to efficiently estimate probabilities from the probability distribution
+$P_a(S)$ for $S \in \set{0,1,\bullet}^n$.
+Using the poly-box construction above and some smart searching using "don't care" values ("$\bullet$"),
+it is possible to efficiently estimate probabilities from the
+$\epsilon$-close (in $\ell_1$ distance) distribution $P^\epsilon_a(S)$.
 And because of poly-sparsity of $\mathcal C$ there exists a $P^\epsilon_a$
 with a polynomial upper bound $t = O\left(\text{poly}(\epsilon^{-1})\right)$
 on relevant outputs.
@@ -269,12 +274,13 @@ thus resulting in a collapse of the Polynomial Hierarchy to the third level.
 to within multiplicative error $1\leq c < \sqrt{2}$, then $\text{Post-}IQP \subseteq \text{Post-}BPP$.
 
 *Proof:*
-Let $L \in \text{Post-}IQP$ decided by a post-selected circuit family $\set{C_w}$
-with post-selection wires $\mathcal P_w$ and output wire $\mathcal O_w$.
+Let $L \in \text{Post-}IQP$ be decided by a post-selected circuit family $\set{C_w}$
+where $w \in \Sigma^*$.
+We can split the output into post-selection wires $\mathcal P_w$ and output wire $\mathcal O_w$.
 From our definition of $\text{Post-}IQP$ we have
 
-$$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq 1 - \epsilon & \text{if $x\in L$},\\
-\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq \epsilon & \text{if $x\not\in L$}.
+$$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq 1 - \epsilon & \text{if $w\in L$},\\
+\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq \epsilon & \text{if $w\not\in L$}.
 \end{cases}$$
 
 for some $0 < \epsilon < 1/2$.
@@ -326,15 +332,15 @@ We have
 $$PH \subseteq P^{\text{Post-}BQP} = P^{\text{Post-}IQP} \subseteq P^{\text{Post-}BPP} \subseteq \Delta_3. \square$$
 
 ## Conclusion
-We have shown that even for extremely limited quantum circuits such as $IQP$ circuits
-(they are far from universal)
+We have shown that even for extremely limited quantum circuits, $IQP$ circuits
+(they are far from universal),
 it is unlikely that these could be weakly simulated classically.
-We can base this on the fact that otherwise the Polynomial Hierarchy
+And we can actually ground this in the fact that otherwise the Polynomial Hierarchy
 would collapse to the third level.
 
-However, we have also shown that when noise enters the system it can become easy to approximate
-and we have introduced the notion of $\epsilon$-simulation to more precisely capture
-the notion of classically sampling from quantum circuits.
+However, we have also shown that when noise enters the system it can become easy to simulate.
+We introduced the notion of $\epsilon$-simulation and poly-boxes to more precisely capture
+the notion of classically simulating quantum circuits.
 There are follow-up results[^iqpnoise] that do indeed show that $IQP$ circuits with noise
 become easy to simulate classically.
 But at the same time they introduce new notions of fault-tolerance to correct for this.
@@ -342,13 +348,10 @@ It is clear that the research is still looking for new ways to precisely defines
 what it means to have a _quantum advantage_.
 
 
+## References / Notes
 
 [^boson1]: Aaronson, Scott, and Alex Arkhipov. "The computational complexity of linear optics." Proceedings of the forty-third annual ACM symposium on Theory of computing. ACM, 2011. {% include doi.html doi='10.1145/1993636.1993682' %}
 [^iqp1]: Bremner, Michael J., Richard Jozsa, and Dan J. Shepherd. "Classical simulation of commuting quantum computations implies collapse of the polynomial hierarchy." Proceedings of the Royal Society of London A: Mathematical, Physical and Engineering Sciences. The Royal Society, 2010. {% include doi.html doi='10.1098/rspa.2010.0301' %}
 [^iqpnoise]: Bremner, Michael J., Ashley Montanaro, and Dan J. Shepherd. "Achieving quantum supremacy with sparse and noisy commuting quantum computations." Quantum 1 (2017): 8. {% include doi.html doi='10.22331/q-2017-04-25-8' %}
 [^aurorabarak]: Arora, Sanjeev, and Boaz Barak. Computational complexity: a modern approach. Cambridge University Press, 2009.
 [^han]: Han, Yenjo, Lane A. Hemaspaandra, and Thomas Thierauf. "Threshold computation and cryptographic security." SIAM Journal on Computing 26.1 (1997): 59-78. {% include doi.html doi='10.1137/S0097539792240467' %}
-
-
-
-## Conclusion
