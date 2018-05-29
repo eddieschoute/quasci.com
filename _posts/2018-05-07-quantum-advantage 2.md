@@ -84,18 +84,12 @@ which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
   $\norm{\mathcal P - \mathcal P^ε}_1 ≤ ε$.
   In addition, its run-time should scale polynomially in $1/ε$.
 
-![Epsilon-close probability distribution]({{ site.url }}/img/epsilon-close-probability.svg)\\
-_On the left is the original probability distribution $\mathcal P$.
-On the right we have approximated $\mathcal P$ by an $\epsilon$-close distribution that is sparser:
-We have fewer nonzero entries._
-{:.center}
-
 With the definition of ε-sampling, we can say that an algorithm can ε-simulate a quantum circuit $\mathcal C$
 if it can ε-sample from the associated probability distribution $\mathcal P_\mathcal C$.
 Basically, an $\epsilon$-simulator is a weak simulator of a probability distribution that is
 $\epsilon$-close to the real probability distribution.
 A result of Hakop et al.[^hakop1] is that an ε-simulator of $\mathcal C$ is indistinguishable from
-$\mathcal C$, and is also efficient due to the polynomial run-time constraints.
+$\mathcal C$ and also is efficient due to the polynomial run-time constraints.
 Not only that, but it is also _necessary_ to be an ε-simulator for any kind of simulation scheme
 to be efficient and indistinguishable from $\mathcal C$[^hakopscenario].
 
@@ -109,11 +103,11 @@ a classical computer, but it may be possible to construct poly-boxes for certain
 families.
 
 **Definition:** Poly-box
-: Given is a finite alphabet $\Sigma$.
-Let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
+: Given is a finite alphabet $\Sigma$,
+let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
 Then $\Sigma^\*$ defines a family of quantum circuits
 $\mathbb S = \set{\mathcal C_a \middle| a ∈ Σ^\*}$.
-The associated family of probability distributions is
+The associated family of probability distributions be
 $\mathbb P = \set{\mathcal P_\mathcal C \middle| \mathcal C ∈ \mathbb S}$.\\
 We want to be able to estimate probabilities for output strings $S ∈ \set{0,1,\bullet}^{n+1}$
 with a "$\bullet$" meaning "don't care", $0$ or $1$ are both fine.
@@ -129,7 +123,7 @@ Let us define a circuit $\mathcal C_e$ that takes in some quantum circuit descri
 The circuit $\mathcal C_e$ samples a single bit $X$ from the quantum circuit
 described by $a$: $\mathcal C_a$.
 (Note that for general quantum circuits it
-is already hard to efficiently produce this single bit classically!)
+is already hard to efficiently produce this single bit clasically!)
 Finally, $\mathcal C_e$ samples a uniform string $Y ∈ \set{0,1}^n$ and outputs
 $(X ⊕ \text{Parity}(Y), Y) ∈ \set{0,1}^{n+1}$.[^parityandxor]
 Basically, we are obfuscating the hard-to-produce $X$ with a uniform $Y$,
@@ -148,45 +142,40 @@ for which we need to estimate the probability $\mathcal P(S)$ then output $1/2^{
 This will take time $O(2^n) ⊆ O(ε^{-1})$ so it is still efficient in $ε^{-1}$.
 1. Large ε: if $ε ≥ 1/2^n$ simply output $p=1/2^{n+1}$ as a guess.
 
-Now, through some straightforward computation, you can show that in all three cases
+Now through some straightforward computation you can show that in all three cases
 this does meet the requirements of a poly-box as it is sufficiently close to the real $P(S)$.
 The problem here is that we have thinned the probability of any one string occurring so much
 that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
 
-If, instead, the circuit has only a polynomial number of outcomes with significant probability
+If, instead, there are only a polynomial number of outputs with significant probability
 then we can $\epsilon$-simulate like we would want to.
-We say that such outcome distributions are _poly-sparse_.
-More specifically, there must be a polynomially-sized upper bound on the number of relevant outcomes of
+We say that such output distributions are _poly-sparse_.
+More specifically, there must be a polynomially-sized upper bound on the number of relevant outputs of
 $t = O\left(\text{poly}(n/\epsilon)\right)$ with $n$ the size of the input string and $ε$ the error.
-Given poly-sparsity and the parameter $t$,
-we can construct a distribution $\mathcal P^\epsilon$
-with only $t$ outcomes with non-zero probabilty such that
+Given $t$, it must then be possible to construct a distribution $\mathcal P^\epsilon$ with only $t$ outputs with non-zero probabilty such that
 
 $$\norm{\mathcal P - \mathcal P^\epsilon}_1 \leq \epsilon .$$
 
-With a poly-box for $\mathcal C$ we can estimate the $t$ relevant outcomes
-and _explicitly_ reconstruct $\mathcal P^\epsilon$.
+With a poly-box for $\mathcal C$ we can now estimate the $t$ relevant probabilities
+and explicitly reconstruct the approximate distribution $\mathcal P^\epsilon$.
 This distribution $\mathcal P^\epsilon$ is $\epsilon$-close to the real output distribution $\mathcal P_{\mathcal C}$
 and thus suffices for $\epsilon$-simulation of $\mathcal C$.
 
 **Theorem 1**[^hakop1] : "Let $\mathcal C$ be a family of quantum circuits with corresponding probability
 distributions $\mathbb P$.
 Supose there exists an efficient  poly-box over $\mathcal C$, and $\mathbb P$ is poly-sparse.
-Then, there exists an ε-simulator of $\mathcal C$."
+Then, there exists an $\epsilon$-simulator of $\mathcal C$."
 
 *Proof*: Let $a \in \Sigma^*$ and $\epsilon > 0$.
-The poly-box over the circuit family $\mathcal C$
-allows us to efficiently estimate probabilities from the probability distribution
-$P_a(S)$ for $S \in \set{0,1,\bullet}^n$.
-Using the poly-box construction above and some smart searching using "don't care" values ("$\bullet$"),
-it is possible to efficiently estimate probabilities from the
-$\epsilon$-close (in $\ell_1$ distance) distribution $P^\epsilon_a(S)$.
+From the poly-box for all $S \in \set{0,1,\bullet}^n$ over the circuit family $\mathcal C$
+we have a polynomial-time algorithm to efficiently estimates probabilities from the probability distribution $P_a(S)$.
+Using the poly-box construction above it is also possible to efficiently estimate probabilities from the $\epsilon$-close (in $\ell_1$ distance) distribution $P^\epsilon_a(S)$.
 And because of poly-sparsity of $\mathcal C$ there exists a $P^\epsilon_a$
 with a polynomial upper bound $t = O\left(\text{poly}(\epsilon^{-1})\right)$
 on relevant outputs.
-So we construct an ε-simulator for $\mathcal C$ by reconstructing the probability distribution over the $t$ possible outcomes in the poly-sparse $P^ε_a$.
+So we construct an $\epsilon$-simulator for $\mathcal C$ by reconstructing the probability distribution over the $t$ possible outcomes in the poly-sparse $P^\epsilon_a$.
 We can do this by recursively searching $S$ using "don't cares" for the $t$ relevant outcomes (the rest has probability mass 0) in polynomial time[^schwarz2013].
-With $P^ε_a$ explicitly computed it is straightforward to sample from it.$\square$
+With $P^\epsilon_a$ explicitly computed it is straightforward to sample from it. $\square$
 
 *[QuICS]: Joint Center for Quantum Information and Computer Science
 *[product state]: Uncorrelated quantum state.
@@ -232,7 +221,7 @@ i.e. it can decide any language in $B$ by querying the oracle in one time step.
 Now let the polynomial hierarchy be defined as
 $\Delta_{k+1} = P^{N\Delta_k}$, with $\Delta_1 = P$ and $N\Delta_k$ the nondeterministic class
 associated to $\Delta_k$ (like $NP$ is associated to $P$).
-It is known that if $\Delta_i = \Delta_{i+1}$ for some $i$ then $\Delta_i = \Delta_j$ for all $j > i$.[^aurorabarak]
+It is known that if $\Delta_i = \Delta_{i+1}$ for some $i$ then $\Delta_i = \Delta_j$ for all $j > i$.
 This is usually referred to as a _collapse of the polynomial hierarchy_ to the $i$-th level.
 Such a collapse is not expected to be the case
 and is often likened to $P = NP$ (a collapse to the first level)
@@ -254,7 +243,7 @@ with output $\mathcal O_w$ and post-selection wires $\mathcal P_w$ such that
 * if $w \in L$ then $\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$ and
 * if $w \not\in L$ then $\Pr\left[\mathcal O_w = 0 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$.
 
-It is known that $\text{Post-}BPP \subseteq \Delta_3$.[^han]
+It is known that $\text{Post-}BPP \subseteq \Delta_3$.
 And from $P^{P^A} = P^A$ we have
 
 $$P^{\text{Post-}BPP} \subseteq P^{\Delta_3} = \Delta_3.$$
@@ -265,63 +254,64 @@ that post-selected quantum decision problems contain the entire polynomial hiera
 $$PH \subseteq P^{\text{Post-}BQP}.$$
 
 Bremner, Jozsa and Shepherd[^iqp1] showed that $\text{Post-}IQP = \text{Post-}BQP$.
-We will show that if $IQP$ circuits could be weakly simulated
-and that this implies
-$\text{Post-}IQP \subseteq = \text{Post-}BPP$,
+We will then show that if $IQP$ circuits could be weakly simulated we will also show this implies
+$\text{Post-}BPP = \text{Post-}BQP$
 thus resulting in a collapse of the Polynomial Hierarchy to the third level.
 
 **Theorem 2:** If the output distributions of families of $IQP$ circuits could be weakly simulated
-to within multiplicative error $1\leq c < \sqrt{2}$, then $\text{Post-}IQP \subseteq \text{Post-}BPP$.
+to within multiplicative error $1\leq c < \sqrt{2}$ then $\text{Post-}BPP = \text{Post-}BQP$.
 
 *Proof:*
-Let $L \in \text{Post-}IQP$ be decided by a post-selected circuit family $\set{C_w}$
-where $w \in \Sigma^*$.
-We can split the output into post-selection wires $\mathcal P_w$ and output wire $\mathcal O_w$.
+Let $L \in \text{Post-}IQP$ decided by a post-selected circuit family $\set{C_w}$
+with post-selection wires $\mathcal P_w$ and output wire $\mathcal O_w$.
 From our definition of $\text{Post-}IQP$ we have
 
-$$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq 1 - \epsilon & \text{if $w\in L$},\\
-\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq \epsilon & \text{if $w\not\in L$}.
+$$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq 1 - \epsilon & \text{if $x\in L$},\\
+\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq \epsilon & \text{if $x\not\in L$}.
 \end{cases}$$
 
 for some $0 < \epsilon < 1/2$.
 Now let $\mathcal Y_w$ be all $m$ output wires of $\mathcal C_w$.
-We assumed that there exists a classical randomized weak simulator of $\mathcal C_w$
-called $\widetilde{\mathcal C}_w$,
-with associated output wires $\widetilde{\mathcal Y}_w$ such that
+We assumed that there exists a classical randomize weak simulator of $\mathcal C_w$
+called $\widetilde{\mathcal C_w}$,
+with associated output wires $\widetilde{\mathcal O_w}$ and $\widetilde{\mathcal P_w}$,
+such that we can weakly sample from the approximate $\widetilde{\mathcal Y_w}$ with
 
 $$\frac{1}{c} \Pr\left[\mathcal Y_w = y_1\ldots y_m\right]
-\leq \Pr\left[\widetilde{\mathcal Y}_w = y_1\ldots y_m\right]
-\leq c \Pr\left[\mathcal Y_w = y_1 \ldots y_m\right].$$
+\leq \Pr\left[\widetilde{\mathcal Y_w} = y_1\ldots y_m\right]
+\leq c \Pr\left[\mathcal Y_w = y_1 \ldots y_m\right]$$
 
-This also holds for any subsets of registers of $\widetilde{\mathcal Y}_w$
-such as the output wire $\widetilde{\mathcal O}_w$ and post-selection wires $\widetilde{\mathcal P}_w$.
-Now we have for $x \in \set{0,1}$
+for a multiplicative error $c$.
+This also holds for any subsets of registers of $\widetilde{\mathcal Y_w}$
+such as $\widetilde{\mathcal O_w}$ and $\widetilde{\mathcal P_w}$.
+Now we have by Born's rule
 
-$$\Pr\left[\widetilde{\mathcal O}_w = x \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right]
-= \frac{\Pr\left[\widetilde{\mathcal O}_w = x \land \widetilde{\mathcal P}_w = 0 \ldots 0\right]}{\Pr\left[\widetilde{\mathcal P}_w = 0 \ldots 0\right]}\\
-\leq c^2 \Pr\left[\mathcal O_w = x \middle\vert \mathcal P_w = 0\ldots 0\right], $$
+$$\Pr\left[\widetilde{\mathcal O_w} = 0 \middle\vert \widetilde{\mathcal P_w} = 0 \ldots 0\right]
+= \frac{\Pr\left[\widetilde{\mathcal O_w} = 0 \land \widetilde{\mathcal P_w} = 0 \ldots 0\right]}{\Pr\left[\widetilde{\mathcal P_w} = 0 \ldots 0\right]}\\
+\leq c^2 \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right]$$
 
 and a similar calculation shows
 
-$$\Pr\left[\widetilde{\mathcal O}_w = x \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = x \middle\vert \mathcal P_w = 0\ldots 0\right].$$
+$$\frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right]
+\leq \Pr\left[\widetilde{\mathcal O_w} = 0 \middle\vert \widetilde{\mathcal P_w} = 0 \ldots 0\right].$$
 
-We combine these two results and fill in $x=1$, together with the first equation in the proof, to get
+We have
 
 $$\begin{cases}
-w\in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-\epsilon\right)\\
-w\not \in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 \epsilon\\
+w\in L: \Pr\left[\widetilde{O_w} = 1 \middle\vert \widetilde{P_w} = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-\epsilon\right)\\
+w\not \in L: \Pr\left[\widetilde{O_w} = 1 \middle\vert \widetilde{P_w} = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 \epsilon\\
 \end{cases}.$$
 
 We just need to adjust $c$ to make sure that $L$ can be decided in $\text{Post-}BPP$:
-It must decide correctly more often than not,
-and there needs to be constant-sized gap between $w\in L$ and $w\not \in L$ decisions,
+I.e. there is constant-sized gap between $w\in L$ and $w\not \in L$ decisions
+and we decide correctly more often than not.
 So we get $1/c^2 (1-\epsilon) > 1/2$ for $w \in L$, leading to $c^2/2 < 1-\epsilon$.
-Since $0 < \epsilon < 1/2$, we have that $1 \leq c < \sqrt{2}$ meets these constraints
-and are sufficient to show that $L \in \text{Post-}BPP$.$\square$
+Since $0 < \epsilon < 1/2$ we have that $1 \leq c < \sqrt{2}$ suffices
+to show $L \in \text{Post-}BPP$.$\square$
 
 The main result follows directly from the previous Theorem and facts stated directly prior to it.
 
-**Corollary 3:**
+**Corrolary 3:**
 If there is a weak simulator of families of $IQP$ circuits to within
 multiplicative error $1 \leq c < \sqrt{2}$ then
 the Polynomial Hierarchy would collapse to the third level.
@@ -332,15 +322,15 @@ We have
 $$PH \subseteq P^{\text{Post-}BQP} = P^{\text{Post-}IQP} \subseteq P^{\text{Post-}BPP} \subseteq \Delta_3. \square$$
 
 ## Conclusion
-We have shown that even for extremely limited quantum circuits, $IQP$ circuits
-(they are far from universal),
+We have shown that even for extremely limited quantum circuits such as $IQP$ circuits
+(they are far from universal)
 it is unlikely that these could be weakly simulated classically.
-And we can actually ground this in the fact that otherwise the Polynomial Hierarchy
+We can base this on the fact that otherwise the Polynomial Hierarchy
 would collapse to the third level.
 
-However, we have also shown that when noise enters the system it can become easy to simulate.
-We introduced the notion of $\epsilon$-simulation and poly-boxes to more precisely capture
-the notion of classically simulating quantum circuits.
+However, we have also shown that when noise enters the system it can become easy to approximate
+and we have introduced the notion of $\epsilon$-simulation to more precisely capture
+the notion of classically sampling from quantum circuits.
 There are follow-up results[^iqpnoise] that do indeed show that $IQP$ circuits with noise
 become easy to simulate classically.
 But at the same time they introduce new notions of fault-tolerance to correct for this.
@@ -348,10 +338,10 @@ It is clear that the research is still looking for new ways to precisely defines
 what it means to have a _quantum advantage_.
 
 
-## References / Notes
 
 [^boson1]: Aaronson, Scott, and Alex Arkhipov. "The computational complexity of linear optics." Proceedings of the forty-third annual ACM symposium on Theory of computing. ACM, 2011. {% include doi.html doi='10.1145/1993636.1993682' %}
 [^iqp1]: Bremner, Michael J., Richard Jozsa, and Dan J. Shepherd. "Classical simulation of commuting quantum computations implies collapse of the polynomial hierarchy." Proceedings of the Royal Society of London A: Mathematical, Physical and Engineering Sciences. The Royal Society, 2010. {% include doi.html doi='10.1098/rspa.2010.0301' %}
 [^iqpnoise]: Bremner, Michael J., Ashley Montanaro, and Dan J. Shepherd. "Achieving quantum supremacy with sparse and noisy commuting quantum computations." Quantum 1 (2017): 8. {% include doi.html doi='10.22331/q-2017-04-25-8' %}
-[^aurorabarak]: Arora, Sanjeev, and Boaz Barak. Computational complexity: a modern approach. Cambridge University Press, 2009.
-[^han]: Han, Yenjo, Lane A. Hemaspaandra, and Thomas Thierauf. "Threshold computation and cryptographic security." SIAM Journal on Computing 26.1 (1997): 59-78. {% include doi.html doi='10.1137/S0097539792240467' %}
+
+
+## Conclusion
