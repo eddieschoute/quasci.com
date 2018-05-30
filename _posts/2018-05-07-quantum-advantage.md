@@ -53,7 +53,7 @@ because no real quantum computer will be completely noiseless
 and thus cannot sample exactly from $\mathcal P_\mathcal C$.
 It is therefore maybe unreasonable to expect a classical computer to do either of these
 (except for simple circuits)
-and we will instead define $\epsilon$-simulation that relaxes the constraints further.
+and we will instead define ε-simulation that relaxes the constraints further.
 
 ![A general quantum circuit]({{ site.url }}/img/quantum-simulation-circuit.svg)\\
 _A general quantum circuit, with $n$ product state inputs, a unitary evolution,
@@ -86,14 +86,14 @@ which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
 
 ![Epsilon-close probability distribution]({{ site.url }}/img/epsilon-close-probability.svg)\\
 _On the left is the original probability distribution $\mathcal P$.
-On the right we have approximated $\mathcal P$ by an $\epsilon$-close distribution that is sparser:
+On the right we have approximated $\mathcal P$ by an ε-close distribution that is sparser:
 We have fewer nonzero entries._
 {:.center}
 
 With the definition of ε-sampling, we can say that an algorithm can ε-simulate a quantum circuit $\mathcal C$
 if it can ε-sample from the associated probability distribution $\mathcal P_\mathcal C$.
-Basically, an $\epsilon$-simulator is a weak simulator of a probability distribution that is
-$\epsilon$-close to the real probability distribution.
+Basically, an ε-simulator is a weak simulator of a probability distribution that is
+ε-close to the real probability distribution.
 A result of Hakop et al.[^hakop1] is that an ε-simulator of $\mathcal C$ is indistinguishable from
 $\mathcal C$ and also is efficient due to the polynomial run-time constraints.
 Not only that, but it is also _necessary_ to be an ε-simulator for any kind of simulation scheme
@@ -163,35 +163,35 @@ The problem here is that we have thinned the probability of any one string occur
 that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
 
 If, instead, the circuit has only a polynomial number of outcomes with significant probability
-then we can $\epsilon$-simulate like we would want to.
+then we can ε-simulate like we would want to.
 We say that such outcome distributions are _poly-sparse_.
 More specifically, there must be a polynomially-sized upper bound on the number of relevant outcomes of
-$t = O\left(\text{poly}(n/\epsilon)\right)$ with $n$ the size of the input string and $ε$ the error.
+$t = O\left(\text{poly}(n/ε)\right)$ with $n$ the size of the input string and $ε$ the error.
 Given poly-sparsity and the parameter $t$,
-we can construct a distribution $\mathcal P^\epsilon$
+we can construct a distribution $\mathcal P^ε$
 with only $t$ outcomes with non-zero probabilty such that
 
-$$\norm{\mathcal P - \mathcal P^\epsilon}_1 \leq \epsilon .$$
+$$\norm{\mathcal P - \mathcal P^ε}_1 \leq ε .$$
 
 With a poly-box for $\mathcal C$ we can estimate the $t$ relevant outcomes
-and _explicitly_ reconstruct $\mathcal P^\epsilon$.
-This distribution $\mathcal P^\epsilon$ is $\epsilon$-close to the real output distribution $\mathcal P_{\mathcal C}$
-and thus suffices for $\epsilon$-simulation of $\mathcal C$.
+and _explicitly_ reconstruct $\mathcal P^ε$.
+This distribution $\mathcal P^ε$ is ε-close to the real output distribution $\mathcal P_{\mathcal C}$
+and thus suffices for ε-simulation of $\mathcal C$.
 
 **Theorem 1**[^hakop1] : "Let $\mathcal C$ be a family of quantum circuits with corresponding probability
 distributions $\mathbb P$.
 Supose there exists an efficient  poly-box over $\mathcal C$, and $\mathbb P$ is poly-sparse.
 Then, there exists an ε-simulator of $\mathcal C$."
 
-*Proof*: Let $a \in \Sigma^*$ and $\epsilon > 0$.
+*Proof*: Let $a \in \Sigma^*$ and $ε > 0$.
 The poly-box over the circuit family $\mathcal C$
 allows us to efficiently estimate probabilities from the probability distribution
 $P_a(S)$ for $S \in \set{0,1,\bullet}^n$.
 Using the poly-box construction above and some smart searching using "don't care" values ("$\bullet$"),
 it is possible to efficiently estimate probabilities from the
-$\epsilon$-close (in $\ell_1$ distance) distribution $P^\epsilon_a(S)$.
-And because of poly-sparsity of $\mathcal C$ there exists a $P^\epsilon_a$
-with a polynomial upper bound $t = O\left(\text{poly}(\epsilon^{-1})\right)$
+ε-close (in $\ell_1$ distance) distribution $P^ε_a(S)$.
+And because of poly-sparsity of $\mathcal C$ there exists a $P^ε_a$
+with a polynomial upper bound $t = O\left(\text{poly}(ε^{-1})\right)$
 on relevant outputs.
 So we construct an ε-simulator for $\mathcal C$ by reconstructing the probability distribution over the $t$ possible outcomes in the poly-sparse $P^ε_a$.
 We can do this by recursively searching $S$ using "don't cares" for the $t$ relevant outcomes (the rest has probability mass 0) in polynomial time[^schwarz2013].
@@ -257,11 +257,11 @@ But first let us define post-selected circuits more formally.
 
 **Definition:** Post-selected Complexity Classes[^iqp1]
 : A language $L$ is in $\text{Post-}A$ for complexity class $A$ (either $BPP$, $BQP$, or $IQP$)
-if and only if there is an error tolerance $0 < \epsilon < 1/2$
+if and only if there is an error tolerance $0 < ε < 1/2$
 and a family of circuits ${\mathcal C_w}$ of post-selected $A$ circuits
 with output $\mathcal O_w$ and post-selection wires $\mathcal P_w$ such that
-* if $w \in L$ then $\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$ and
-* if $w \not\in L$ then $\Pr\left[\mathcal O_w = 0 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - \epsilon$.
+* if $w \in L$ then $\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - ε$ and
+* if $w \not\in L$ then $\Pr\left[\mathcal O_w = 0 \middle\vert \mathcal P_w = 0\ldots 0 \right] \geq 1 - ε$.
 
 It is known that $\text{Post-}BPP \subseteq \Delta_3$.[^han]
 And from $P^{P^A} = P^A$ we have
@@ -288,11 +288,11 @@ where $w \in \Sigma^*$.
 We can split the output into post-selection wires $\mathcal P_w$ and output wire $\mathcal O_w$.
 From our definition of $\text{Post-}IQP$ we have
 
-$$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq 1 - \epsilon & \text{if $w\in L$},\\
-\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq \epsilon & \text{if $w\not\in L$}.
+$$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq 1 - ε & \text{if $w\in L$},\\
+\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq ε & \text{if $w\not\in L$}.
 \end{cases}$$
 
-for some $0 < \epsilon < 1/2$.
+for some $0 < ε < 1/2$.
 Now let $\mathcal Y_w$ be all $m$ output wires of $\mathcal C_w$.
 We assumed that there exists a classical randomized weak simulator of $\mathcal C_w$
 called $\widetilde{\mathcal C}_w$,
@@ -317,15 +317,15 @@ $$\Pr\left[\widetilde{\mathcal O}_w = x \middle\vert \widetilde{\mathcal P}_w = 
 We combine these two results and fill in $x=1$, together with the first equation in the proof, to get
 
 $$\begin{cases}
-w\in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-\epsilon\right)\\
-w\not \in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 \epsilon\\
+w\in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-ε\right)\\
+w\not \in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 ε\\
 \end{cases}.$$
 
 We just need to adjust $c$ to make sure that $L$ can be decided in $\text{Post-}BPP$:
 It must decide correctly more often than not,
 and there needs to be constant-sized gap between $w\in L$ and $w\not \in L$ decisions,
-So we get $1/c^2 (1-\epsilon) > 1/2$ for $w \in L$, leading to $c^2/2 < 1-\epsilon$.
-Since $0 < \epsilon < 1/2$, we have that $1 \leq c < \sqrt{2}$ meets these constraints
+So we get $1/c^2 (1-ε) > 1/2$ for $w \in L$, leading to $c^2/2 < 1-ε$.
+Since $0 < ε < 1/2$, we have that $1 \leq c < \sqrt{2}$ meets these constraints
 and are sufficient to show that $L \in \text{Post-}BPP$.$\square$
 
 The main result follows directly from the previous Theorem and facts stated directly prior to it.
@@ -347,7 +347,7 @@ We can base this on the fact that otherwise the Polynomial Hierarchy
 would collapse to the third level.
 
 We have also shown, however, that when noise enters the system, it can become easy to simulate.
-We introduced the notion of $\epsilon$-simulation and poly-boxes to more precisely capture
+We introduced the notion of ε-simulation and poly-boxes to more precisely capture
 the notion of classically simulating quantum circuits.
 There are follow-up results[^iqpnoise] that do indeed show that $IQP$ circuits with noise
 become easy to simulate classically.
