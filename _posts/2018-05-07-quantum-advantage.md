@@ -332,19 +332,18 @@ We have
 $$PH \subseteq P^{\text{Post-}BQP} = P^{\text{Post-}IQP} \subseteq P^{\text{Post-}BPP} \subseteq \Delta_3. \square$$
 
 ## Conclusion
-We have shown that even for extremely limited quantum circuits such as $IQP$ circuits
-(they are far from universal)
-it is unlikely that these could be weakly simulated classically.
+We have shown that even for such limited quantum circuits as $IQP$ circuits,
+it is unlikely that they could be weakly simulated classically.
 We can base this on the fact that otherwise the Polynomial Hierarchy
 would collapse to the third level.
 
-However, we have also shown that when noise enters the system it can become easy to simulate.
+We have also shown, however, that when noise enters the system, it can become easy to simulate.
 We introduced the notion of $\epsilon$-simulation and poly-boxes to more precisely capture
 the notion of classically simulating quantum circuits.
 There are follow-up results[^iqpnoise] that do indeed show that $IQP$ circuits with noise
 become easy to simulate classically.
 But at the same time they introduce new notions of fault-tolerance to correct for this.
-It is clear that the research is still looking for new ways to precisely defines
+It is clear that the research is still looking for new ways to precisely define
 what it means to have a _quantum advantage_.
 
 
