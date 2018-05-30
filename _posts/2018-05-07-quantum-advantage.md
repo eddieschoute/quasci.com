@@ -121,6 +121,15 @@ Then a poly-box is a classical algorithm that can estimate $\mathcal P(S)$
 for all $\mathcal P ∈ \mathbb P$
 efficiently in the number of samples $s \in \mathbb N$ and the number of qubits $n$.
 
+![What does a polybox do]({{ site.url }}/img/polybox.svg)\\
+_With a poly-box we are able to estimate the probability of outcomes for a quantum circuit
+in polynomial time.
+Additionally, we can compute probabilties for all strings $S ∈ \set{0,1,\bullet}^{n+1}$ where
+"$\bullet$" can represents a "don't care": It matches both $0$ and $1$.
+The number of samples $s∈ℕ$ can be computed from the intended error $ε$._
+{:.center}
+
+
 Circuit families must admit a poly-box to be ε-simulable,
 but it is not sufficient.
 We will give a fairly simple example of a circuit that does admit a poly-box
