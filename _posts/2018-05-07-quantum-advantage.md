@@ -30,23 +30,25 @@ we do know that the polynomial hierarchy ($PH$) must collapse if classical compu
 
 
 ## Simulating Quantum Processes
-One side of the discussion is determining which quantum processes can be efficiently simulated
+One side of the discussion looks at determining which quantum processes can be efficiently simulated
 by a classical computer.
 We recently had Hakop Pashayan vist QuICS,
 who revealed to us some of the intricacies involved in this line of research.
-In their paper Hakop et al. explain the concept of ε-simulation[^hakop1].
-For any quantum circuit $\mathcal C$ there exists some probability distribution $\mathcal P_\mathcal C$ over the outcomes $X=(X_1, X_2, …, X_k)$,
+In their paper, Hakop et al. explain the concept of ε-simulation[^hakop1].
+For any quantum circuit $\mathcal C$ with fixed inputs there exists some probability distribution
+$\mathcal P_\mathcal C$ over the outcomes $X=(X_1, X_2, …, X_k)$,
 which is just a classical random variable.
 Any noiseless circuit $\mathcal C$ can be described as starting with the product state $ρ_1 ⊗ … ⊗ ρ_n$
 on $n$ qubits,
 followed by some unitary operation $U$, and finally measuring qubits $1$ through $k$.
+
 For example, one could ask the question what is the probability of measuring $(X_0, X_1) = (1,0)$ ignoring $X_2,…X_k$?
 Or in other words, what is $\mathcal P(X_0 = 1, X_1 = 0)$?
 An algorithm that can produce the answer to this (and similar) questions is called a _strong simulator_.
-This is quite a powerful notion, since it is more powerful than a theoretical quantum computer
+This is quite a powerful notion since it is more powerful than a theoretical quantum computer
 which can only produce a sample from the output distribution.
 A slightly weaker notion is that of _weak simulation_:
-instead of the exact probability
+Instead of the exact probability,
 output a sample in accordance with the output distribution $\mathcal P_\mathcal C$.
 Even constructing a _weak simulator_ is probably too lofty of a goal,
 because no real quantum computer will be completely noiseless
@@ -79,18 +81,12 @@ which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
 
 **Definition:** ε-sampling [^hakop1]
 : Let $\mathcal P$ be a discrete probability distribution.
-  We say that a classical device or algorithm can ε-sample $\mathcal P$ iff for any $ε>0$
+  We say that an algorithm can ε-sample $\mathcal P$ iff for any $ε>0$
   it can sample from a probability distribution $P^ε$ such that
   $\norm{\mathcal P - \mathcal P^ε}_1 ≤ ε$.
   In addition, its run-time should scale polynomially in $1/ε$.
 
-![Epsilon-close probability distribution]({{ site.url }}/img/epsilon-close-probability.svg)\\
-_On the left is the original probability distribution $\mathcal P$.
-On the right we have approximated $\mathcal P$ by an ε-close distribution that is sparser:
-We have fewer nonzero entries._
-{:.center}
-
-With the definition of ε-sampling, we can say that an algorithm can ε-simulate a quantum circuit $\mathcal C$
+We say that an algorithm can ε-simulate a quantum circuit $\mathcal C$
 if it can ε-sample from the associated probability distribution $\mathcal P_\mathcal C$.
 Basically, an ε-simulator is a weak simulator of a probability distribution that is
 ε-close to the real probability distribution.
@@ -124,19 +120,19 @@ efficiently in the number of samples $s \in \mathbb N$ and the number of qubits 
 ![What does a polybox do]({{ site.url }}/img/polybox.svg)\\
 _With a poly-box we are able to estimate the probability of outcomes for a quantum circuit
 in polynomial time.
-Additionally, we can compute probabilties for all strings $S ∈ \set{0,1,\bullet}^{n+1}$ where
-"$\bullet$" can represents a "don't care": It matches both $0$ and $1$.
+Additionally, we can estimate marginal probabilities for all strings $S ∈ \set{0,1,\bullet}^{n+1}$
+where "$\bullet$" can represents a "don't care": It matches both $0$ and $1$.
 The number of samples $s∈ℕ$ can be computed from the intended error $ε$._
 {:.center}
 
-
+#### Poly-boxes are not sufficient for ε-simulation. A counter-example.
 Circuit families must admit a poly-box to be ε-simulable,
 but it is not sufficient.
 We will give a fairly simple example of a circuit that does admit a poly-box
 but does not admit an ε-simulator (unless $BQP ⊆ BPP$).
 Let us define a circuit $\mathcal C_e$ that takes in some quantum circuit description $a ∈ Σ^\*$.
 The circuit $\mathcal C_e$ samples a single bit $X$ from the quantum circuit
-described by $a$: $\mathcal C_a$.
+described by $a$, $\mathcal C_a$.
 (Note that for general quantum circuits it
 is already hard to efficiently produce this single bit classically!)
 Finally, $\mathcal C_e$ samples a uniform string $Y ∈ \set{0,1}^n$ and outputs
@@ -147,33 +143,40 @@ but given the entire output it is easy to figure out $X$.
 
 [^parityandxor]: $\text{Parity}(Y) = 1$ iff the number of ones in $Y$ is even. $\oplus$ is the exclusive or.
 
-The real kicker, however, is that $C_e$ is not ε-simulable,
+The real kicker, however, is that $C_e$ is not ε-simulable
 because if it were then it would be possible to sample $X$ (and that's hard).
 But it is actually easy to construct a poly-box for $C_e$ for any given error $0<ε≤1$:
 
 1. If there are $0<k≤n+1$ "don't cares" in the string $S ∈ \set{0,1,\bullet}^{n+1}$
 for which we need to estimate the probability $\mathcal P(S)$ then output $1/2^{n+1-k}$ as a guess.
-1. Otherwise, if $ε < 1/2^n$ then explicitly compute the quantum probability $p=P(X=1)$.
+1. Otherwise, if $ε < 1/2^n$, explicitly compute the probability $P(X=1)$ by brute force.
 This will take time $O(2^n) ⊆ O(ε^{-1})$ so it is still efficient in $ε^{-1}$.
-1. Large ε: if $ε ≥ 1/2^n$ simply output $p=1/2^{n+1}$ as a guess.
+1. Large ε: if $ε ≥ 1/2^n$ simply output the probability $1/2^{n+1}$ as a guess.
 
 Now, through some straightforward computation, you can show that in all three cases
 this does meet the requirements of a poly-box as it is sufficiently close to the real $P(S)$.
 The problem here is that we have thinned the probability of any one string occurring so much
 that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
 
+#### Poly-boxes + sparsity = ε-simulation
 If, instead, the circuit has only a polynomial number of outcomes with significant probability
 then we can ε-simulate like we would want to.
 We say that such outcome distributions are _poly-sparse_.
-More specifically, there must be a polynomially-sized upper bound on the number of relevant outcomes of
-$t = O\left(\text{poly}(n/ε)\right)$ with $n$ the size of the input string and $ε$ the error.
-Given poly-sparsity and the parameter $t$,
-we can construct a distribution $\mathcal P^ε$
+More specifically, there must be a polynomially-sized upper bound on the number of relevant outcomes,
+$t = O\left(\text{poly}(n/ε)\right)$, with $n$ the size of the input string and $ε$ the error.
+Poly-sparsity guarantees us that there exists a parameter $t$,
+so that we can construct a distribution $\mathcal P^ε$
 with only $t$ outcomes with non-zero probabilty such that
 
 $$\norm{\mathcal P - \mathcal P^ε}_1 \leq ε .$$
 
-With a poly-box for $\mathcal C$ we can estimate the $t$ relevant outcomes
+![Epsilon-close probability distribution]({{ site.url }}/img/epsilon-close-probability.svg)\\
+_On the left is some probability distribution $\mathcal P$.
+On the right we have approximated $\mathcal P$ by an ε-close distribution that is sparser:
+We have fewer nonzero entries._
+{:.center}
+
+We can estimate the $t$ relevant outcomes with a poly-box for $\mathcal C$
 and _explicitly_ reconstruct $\mathcal P^ε$.
 This distribution $\mathcal P^ε$ is ε-close to the real output distribution $\mathcal P_{\mathcal C}$
 and thus suffices for ε-simulation of $\mathcal C$.
@@ -194,7 +197,7 @@ And because of poly-sparsity of $\mathcal C$ there exists a $P^ε_a$
 with a polynomial upper bound $t = O\left(\text{poly}(ε^{-1})\right)$
 on relevant outputs.
 So we construct an ε-simulator for $\mathcal C$ by reconstructing the probability distribution over the $t$ possible outcomes in the poly-sparse $P^ε_a$.
-We can do this by recursively searching $S$ using "don't cares" for the $t$ relevant outcomes (the rest has probability mass 0) in polynomial time[^schwarz2013].
+We can do this by recursively searching $S$ using "don't cares" for the $t$ relevant outcomes (the rest has probability mass $0$) in polynomial time[^schwarz2013].
 With $P^ε_a$ explicitly computed it is straightforward to sample from it.$\square$
 
 *[QuICS]: Joint Center for Quantum Information and Computer Science
@@ -218,7 +221,8 @@ but there is multitude of approaches that may be covered in later blog posts.
 
 ### Instantaneous Quantum Polynomial-time (IQP)
 An approach to showing a quantum advantage referred to as IQP is
-to perform a diagonal unitary in the $X$-basis on an input in the Hadamard basis ($\ket +, \ket -$).
+to perform a diagonal unitary in the $X$-basis ($\ket 0 \pm \ket 1$)
+on the all-zero input $\ket{00\dots 0}$.
 Alternatively, we could describe a unitary $D$ diagonal in the $Z$-basis
 and conjugate with $H^{\otimes n}$.
 A string $w \in \Sigma^{\*}$ then describes the diagonal elements of $D_w$ for  the circuit
@@ -233,26 +237,30 @@ then the Polynomial Hierarchy would collapse to the third level.
 
 The Polynomial Hierarchy is an infinite hierarchy of complexity classes
 of increasing computational power.
-It uses the notion of an _oracle_,
+Defining it requires the notion of an _oracle_,
 a black box that can be queried in one time step for an answer in its complexity class.
-For complexity classes $A$ and $B$, we have that $A^B$ is an algorithm in $A$
-with access to an oracle for $B$,
+For complexity classes $A$ and $B$, we have that $A^B$ is the set of languages
+that can be decided by an algorithm in $A$ with access to an oracle for $B$,
 i.e. it can decide any language in $B$ by querying the oracle in one time step.
 Now let the polynomial hierarchy be defined as
 $\Delta_{k+1} = P^{N\Delta_k}$, with $\Delta_1 = P$ and $N\Delta_k$ the nondeterministic class
 associated to $\Delta_k$ (like $NP$ is associated to $P$).
+We have that
+
+$$Δ_0 \subseteq Δ_1 \subseteq \dots$$
+
 It is known that if $\Delta_i = \Delta_{i+1}$ for some $i$ then $\Delta_i = \Delta_j$ for all $j > i$.[^aurorabarak]
-This is usually referred to as a _collapse of the polynomial hierarchy_ to the $i$-th level.
+This is referred to as a _collapse of the polynomial hierarchy_ to the $i$-th level.
 Such a collapse is not expected to be the case
 and is often likened to $P = NP$ (a collapse to the first level)
 though less extreme.
 
 Another notion that we need is post-selection.
-We can view this as running a probabilistic circuit multiplicative and asserting that the outcomes on
+We can view this as running a classical or quantum circuit and asserting that the outcomes on
 the post-selected wires will all be zero before looking at the output wires.
-This is of course not a natural assumption, since, if you were to run the circuit,
+This is of course not a natural assumption since, if you were to run the circuit,
 you are in no way guaranteed that the outputs on those wires will be zero.
-Nonetheless, it is a useful notion, as we will see later.
+Nonetheless, it is a useful notion as we will see later.
 But first let us define post-selected circuits more formally.
 
 **Definition:** Post-selected Complexity Classes[^iqp1]
@@ -266,20 +274,20 @@ with output $\mathcal O_w$ and post-selection wires $\mathcal P_w$ such that
 It is known that $\text{Post-}BPP \subseteq \Delta_3$.[^han]
 And from $P^{P^A} = P^A$ we have
 
-$$P^{\text{Post-}BPP} \subseteq P^{\Delta_3} = \Delta_3.$$
+$$P^{\text{Post-}BPP} \subseteq P^{\Delta_3} = P^{P^{NΔ_2}} = P^{NΔ_2} = \Delta_3.$$
 
-Furthermore by results of Aaronson and Toda's Theorem we get
+Furthermore, by results of Aaronson and by Toda's Theorem we get
 that post-selected quantum decision problems contain the entire polynomial hierarchy, i.e
 
 $$PH \subseteq P^{\text{Post-}BQP}.$$
 
 Bremner, Jozsa and Shepherd[^iqp1] showed that $\text{Post-}IQP = \text{Post-}BQP$.
-We will show that if $IQP$ circuits could be weakly simulated
-and that this implies
+We will show that if $IQP$ circuits could be weakly simulated that this implies
 $\text{Post-}IQP \subseteq = \text{Post-}BPP$,
 thus resulting in a collapse of the Polynomial Hierarchy to the third level.
+Therefore, it is unlikely that $IQP$ circuits will ever be perfectly simulable by a classical algorithm.
 
-**Theorem 2:** If the output distributions of families of $IQP$ circuits could be weakly simulated
+**Theorem 2:**[^iqp1] If the output distributions of families of $IQP$ circuits could be weakly simulated
 to within multiplicative error $1\leq c < \sqrt{2}$, then $\text{Post-}IQP \subseteq \text{Post-}BPP$.
 
 *Proof:*
@@ -294,7 +302,7 @@ $$\begin{cases}\Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\r
 
 for some $0 < ε < 1/2$.
 Now let $\mathcal Y_w$ be all $m$ output wires of $\mathcal C_w$.
-We assumed that there exists a classical randomized weak simulator of $\mathcal C_w$
+We assumed that there exists a classical randomized weak simulator of $\mathcal C_w$,
 called $\widetilde{\mathcal C}_w$,
 with associated output wires $\widetilde{\mathcal Y}_w$ such that
 
@@ -317,9 +325,9 @@ $$\Pr\left[\widetilde{\mathcal O}_w = x \middle\vert \widetilde{\mathcal P}_w = 
 We combine these two results and fill in $x=1$, together with the first equation in the proof, to get
 
 $$\begin{cases}
-w\in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-ε\right)\\
-w\not \in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 ε\\
-\end{cases}.$$
+w\in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \geq \frac{1}{c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \geq \frac{1}{c^2}\left(1-ε\right),\\
+w\not \in L: \Pr\left[\widetilde{\mathcal O}_w = 1 \middle\vert \widetilde{\mathcal P}_w = 0 \ldots 0\right] \leq {c^2} \Pr\left[\mathcal O_w = 1 \middle\vert \mathcal P_w = 0\ldots 0\right] \leq c^2 ε.\\
+\end{cases}$$
 
 We just need to adjust $c$ to make sure that $L$ can be decided in $\text{Post-}BPP$:
 It must decide correctly more often than not,
@@ -330,7 +338,7 @@ and are sufficient to show that $L \in \text{Post-}BPP$.$\square$
 
 The main result follows directly from the previous Theorem and facts stated directly prior to it.
 
-**Corollary 3:**
+**Corollary 3:**[^iqp1]
 If there is a weak simulator of families of $IQP$ circuits to within
 multiplicative error $1 \leq c < \sqrt{2}$ then
 the Polynomial Hierarchy would collapse to the third level.
@@ -345,11 +353,10 @@ We have shown that even for such limited quantum circuits as $IQP$ circuits,
 it is unlikely that they could be weakly simulated classically.
 We can base this on the fact that otherwise the Polynomial Hierarchy
 would collapse to the third level.
-
-We have also shown, however, that when noise enters the system, it can become easy to simulate.
-We introduced the notion of ε-simulation and poly-boxes to more precisely capture
+And we also introduced the notion of ε-simulation and poly-boxes to more precisely capture
 the notion of classically simulating quantum circuits.
-There are follow-up results[^iqpnoise] that do indeed show that $IQP$ circuits with noise
+
+There are follow-up results[^iqpnoise] that show that $IQP$ circuits with noise
 become easy to simulate classically.
 But at the same time they introduce new notions of fault-tolerance to correct for this.
 It is clear that the research is still looking for new ways to precisely define
