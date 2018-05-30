@@ -95,7 +95,7 @@ if it can ε-sample from the associated probability distribution $\mathcal P_\ma
 Basically, an $\epsilon$-simulator is a weak simulator of a probability distribution that is
 $\epsilon$-close to the real probability distribution.
 A result of Hakop et al.[^hakop1] is that an ε-simulator of $\mathcal C$ is indistinguishable from
-$\mathcal C$, and is also efficient due to the polynomial run-time constraints.
+$\mathcal C$ and also is efficient due to the polynomial run-time constraints.
 Not only that, but it is also _necessary_ to be an ε-simulator for any kind of simulation scheme
 to be efficient and indistinguishable from $\mathcal C$[^hakopscenario].
 
@@ -109,8 +109,8 @@ a classical computer, but it may be possible to construct poly-boxes for certain
 families.
 
 **Definition:** Poly-box
-: Given is a finite alphabet $\Sigma$.
-Let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
+: Given is a finite alphabet $\Sigma$,
+let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
 Then $\Sigma^\*$ defines a family of quantum circuits
 $\mathbb S = \set{\mathcal C_a \middle| a ∈ Σ^\*}$.
 The associated family of probability distributions is
@@ -332,10 +332,10 @@ We have
 $$PH \subseteq P^{\text{Post-}BQP} = P^{\text{Post-}IQP} \subseteq P^{\text{Post-}BPP} \subseteq \Delta_3. \square$$
 
 ## Conclusion
-We have shown that even for extremely limited quantum circuits, $IQP$ circuits
-(they are far from universal),
+We have shown that even for extremely limited quantum circuits such as $IQP$ circuits
+(they are far from universal)
 it is unlikely that these could be weakly simulated classically.
-And we can actually ground this in the fact that otherwise the Polynomial Hierarchy
+We can base this on the fact that otherwise the Polynomial Hierarchy
 would collapse to the third level.
 
 However, we have also shown that when noise enters the system it can become easy to simulate.
