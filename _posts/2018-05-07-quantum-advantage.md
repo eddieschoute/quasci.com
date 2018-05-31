@@ -32,7 +32,7 @@ we do know that the polynomial hierarchy ($PH$) must collapse if classical compu
 ## Simulating Quantum Processes
 One side of the discussion looks at determining which quantum processes can be efficiently simulated
 by a classical computer.
-We recently had Hakop Pashayan vist QuICS,
+We recently had Hakop Pashayan visit QuICS,
 who revealed to us some of the intricacies involved in this line of research.
 In their paper, Hakop et al. explain the concept of ε-simulation[^hakop1].
 For any quantum circuit $\mathcal C$ with fixed inputs there exists some probability distribution
@@ -63,7 +63,7 @@ and then measurements on $k$ of the qubits._
 {:.center}
 
 ### ε-Simulation
-Hakop et al. introduce the notion of ε-simulation,
+Hakop et al. deal with the notion of ε-simulation,
 which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
 
 **Definition:** $\ell_1$ norm and distance for vectors 
