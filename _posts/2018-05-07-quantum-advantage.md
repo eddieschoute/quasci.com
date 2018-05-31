@@ -32,7 +32,7 @@ we do know that the polynomial hierarchy ($PH$) must collapse if classical compu
 ## Simulating Quantum Processes
 One side of the discussion looks at determining which quantum processes can be efficiently simulated
 by a classical computer.
-We recently had Hakop Pashayan vist QuICS,
+We recently had Hakop Pashayan visit QuICS,
 who revealed to us some of the intricacies involved in this line of research.
 In their paper, Hakop et al. explain the concept of ε-simulation[^hakop1].
 For any quantum circuit $\mathcal C$ with fixed inputs there exists some probability distribution
@@ -63,17 +63,17 @@ and then measurements on $k$ of the qubits._
 {:.center}
 
 ### ε-Simulation
-Hakop et al. introduce the notion of ε-simulation,
+Hakop et al. deal with the notion of ε-simulation,
 which allows the simulator to make some ε-sized error in the $\ell_1$ distance.
 
-**Definition:** $\ell_1$ norm and distance for vectors 
+**Definition:** $\ell_1$ norm and distance for vectors
 : For a vector $\mathbf v$ the $\ell_1$ norm is defined as
 
   $$\norm{\mathbf v}_1 = \sum_{i \in \mathbf v} \abs{\mathbf v(i)}.$$
 
   The $\ell_1$ distance between two discrete probability distributions $\mathcal P$ and $\mathcal Q$
   (that are just vectors in some respects) is then
-  
+
   $$\norm{\mathcal{P} - \mathcal{Q}}_1 = \sum_{i ∈ P} \abs{\mathcal P(i) - \mathcal Q(i)}$$
 
   which just takes the absolute vector difference of the two probability distributions.
@@ -100,7 +100,7 @@ to be efficient and indistinguishable from $\mathcal C$[^hakopscenario].
 To be able to ε-simulate a circuit $\mathcal C$ it is first necessary to estimate the probabilities
 for some outcomes of its output probability distribution $\mathcal P_\mathcal C$.
 A _poly-box_ is a metaphorical device that estimates such probabilities in polynomial time.
-It is (presumably) not possible to efficiently estimate probabilities for general quantum circuits using 
+It is (presumably) not possible to efficiently estimate probabilities for general quantum circuits using
 a classical computer, but it may be possible to construct poly-boxes for certain restricted circuit
 families.
 
@@ -134,7 +134,7 @@ Let us define a circuit $\mathcal C_e$ that takes in some quantum circuit descri
 The circuit $\mathcal C_e$ samples a single bit $X$ from the quantum circuit
 described by $a$, $\mathcal C_a$.
 (Note that for general quantum circuits it
-is already hard to efficiently produce this single bit classically!)
+is already hard to efficiently produce this single bit classically, assuming $BPP ⊊ BQP$)
 Finally, $\mathcal C_e$ samples a uniform string $Y ∈ \set{0,1}^n$ and outputs
 $(X ⊕ \text{Parity}(Y), Y) ∈ \set{0,1}^{n+1}$.[^parityandxor]
 Basically, we are obfuscating the hard-to-produce $X$ with a uniform $Y$,
