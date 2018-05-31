@@ -134,7 +134,7 @@ Let us define a circuit $\mathcal C_e$ that takes in some quantum circuit descri
 The circuit $\mathcal C_e$ samples a single bit $X$ from the quantum circuit
 described by $a$, $\mathcal C_a$.
 (Note that for general quantum circuits it
-is already hard to efficiently produce this single bit classically, assuming $BQP ⊄ BPP$)
+is already hard to efficiently produce this single bit classically, assuming $BPP ⊊ BQP$)
 Finally, $\mathcal C_e$ samples a uniform string $Y ∈ \set{0,1}^n$ and outputs
 $(X ⊕ \text{Parity}(Y), Y) ∈ \set{0,1}^{n+1}$.[^parityandxor]
 Basically, we are obfuscating the hard-to-produce $X$ with a uniform $Y$,
