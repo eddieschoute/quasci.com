@@ -26,7 +26,7 @@ So far we actually do not know unconditionally if quantum computing is actually 
 But through the problems of Boson Sampling[^boson1] and Instantaneous Quantum Polynomial-time (IQP) circuits[^iqp1]
 we do know that the polynomial hierarchy ($PH$) must collapse if classical computers can solve them efficiently.
 
-[^supremacydiscussion]: See e.g. one of the most heated [discussions](https://scirate.com/arxiv/1705.06768) I've seen on Scirate, which also touches on the Latin origin of the term _ancilla_ ("housemaid", colloquially: helper qubit). While almost certainly an internet troll, _ancilla the supremacist_ has become somewhat of a joke in my environment, so I guess it has served its purpose.
+[^supremacydiscussion]: See e.g. one of the most heated [discussions](https://scirate.com/arxiv/1705.06768) I've seen on Scirate, which also touches on the Latin origin of the term _ancilla_ ("housemaid", colloquially: helper qubit). While almost certainly an internet troll, _ancilla the supremacist_ has become somewhat of a joke in my environment so I guess it has served its purpose.
 
 
 ## Simulating Quantum Processes
