@@ -7,6 +7,7 @@ summary:    It is believed that quantum computers provide some advantage over cl
     and at solidifying it.
 categories: algorithms advantage complexity
 ---
+_by Eddie Schoute_
 
 The IBM ThinkQ conference was held recently in New York with a focus on near-term quantum computing applications.
 It seems that businesses have successfully been developing larger quantum computers
@@ -361,6 +362,8 @@ become easy to simulate classically.
 But at the same time they introduce new notions of fault-tolerance to correct for this.
 It is clear that the research is still looking for new ways to precisely define
 what it means to have a _quantum advantage_.
+
+_Thanks to Andrew Guo and Abhinav Deshpande for their help in writing this post._
 
 
 ## References / Notes
