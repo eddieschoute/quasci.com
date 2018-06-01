@@ -59,6 +59,7 @@
 @media screen and (min-width: $viewport-large + 14) {
   em img {
     max-width: $measure-width + 14;
+    width: $measure-width + 14;
     margin-left: -7em;
   }
 }
