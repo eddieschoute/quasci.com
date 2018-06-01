@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Classical vs Quantum Computation
-date:       2018-05-07 16:38:05
+date:       2018-06-01 20:21:16
 summary:    It is believed that quantum computers provide some advantage over classical computers,
     but do they really? We will look at both closing the gap between classical and quantum
     and at solidifying it.
