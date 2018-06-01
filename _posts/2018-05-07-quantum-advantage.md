@@ -105,14 +105,14 @@ a classical computer, but it may be possible to construct poly-boxes for certain
 families.
 
 **Definition:** Poly-box
-: Given is a finite alphabet $\Sigma$,
-let $\Sigma^\*$ be the strings of $0$ or more characters from $\Sigma$.
+: Given is a finite alphabet $\Sigma$;
+let $\Sigma^\*$ be strings of characters from $\Sigma$ (including the empty string).
 Then $\Sigma^\*$ defines a family of quantum circuits
 $\mathbb S = \set{\mathcal C_a \middle| a ∈ Σ^\*}$.
 The associated family of probability distributions is
 $\mathbb P = \set{\mathcal P_\mathcal C \middle| \mathcal C ∈ \mathbb S}$.\\
 We want to be able to estimate probabilities for output strings $S ∈ \set{0,1,\bullet}^{n+1}$
-with a "$\bullet$" meaning "don't care", $0$ or $1$ are both fine.
+with a "$\bullet$" meaning "don't care": Match both $0$ and $1$.
 Then a poly-box is a classical algorithm that can estimate $\mathcal P(S)$
 for all $\mathcal P ∈ \mathbb P$
 efficiently in the number of samples $s \in \mathbb N$ and the number of qubits $n$.
@@ -153,10 +153,10 @@ for which we need to estimate the probability $\mathcal P(S)$ then output $1/2^{
 This will take time $O(2^n) ⊆ O(ε^{-1})$ so it is still efficient in $ε^{-1}$.
 1. Large ε: if $ε ≥ 1/2^n$ simply output the probability $1/2^{n+1}$ as a guess.
 
-Now, through some straightforward computation, you can show that in all three cases
-this does meet the requirements of a poly-box as it is sufficiently close to the real $P(S)$.
+Now, through some straightforward computation, you can show that, in all three cases,
+this does meet the requirements of a poly-box, as it is sufficiently close to the real $P(S)$.
 The problem here is that we have thinned the probability of any one string occurring so much
-that for a sufficiently low error ε it becomes easier to compute the quantum probability explicitly.
+that, for a sufficiently low error ε, it becomes easier to compute the quantum probability explicitly.
 
 #### Poly-boxes + sparsity = ε-simulation
 If, instead, the circuit has only a polynomial number of outcomes with significant probability
@@ -225,7 +225,7 @@ to perform a diagonal unitary in the $X$-basis ($\ket 0 \pm \ket 1$)
 on the all-zero input $\ket{00\dots 0}$.
 Alternatively, we could describe a unitary $D$ diagonal in the $Z$-basis
 and conjugate with $H^{\otimes n}$.
-A string $w \in \Sigma^{\*}$ then describes the diagonal elements of $D_w$ for  the circuit
+The strings $w \in \Sigma^{\*}$ then describe diagonal elements of $D_w$ for the circuits
 
 $$\mathcal C_w = H^{\otimes n} D_w H^{\otimes n}$$
 
@@ -241,7 +241,7 @@ Defining it requires the notion of an _oracle_,
 a black box that can be queried in one time step for an answer in its complexity class.
 For complexity classes $A$ and $B$, we have that $A^B$ is the set of languages
 that can be decided by an algorithm in $A$ with access to an oracle for $B$,
-i.e. it can decide any language in $B$ by querying the oracle in one time step.
+i.e. the algorithm may decide any language in $B$ by querying the oracle in one time step.
 Now let the polynomial hierarchy be defined as
 $\Delta_{k+1} = P^{N\Delta_k}$, with $\Delta_1 = P$ and $N\Delta_k$ the nondeterministic class
 associated to $\Delta_k$ (like $NP$ is associated to $P$).
@@ -258,7 +258,7 @@ though less extreme.
 Another notion that we need is post-selection.
 We can view this as running a classical or quantum circuit and asserting that the outcomes on
 the post-selected wires will all be zero before looking at the output wires.
-This is of course not a natural assumption since, if you were to run the circuit,
+This is, of course, not a natural assumption since, if you were to run the circuit,
 you are in no way guaranteed that the outputs on those wires will be zero.
 Nonetheless, it is a useful notion as we will see later.
 But first let us define post-selected circuits more formally.
@@ -283,7 +283,7 @@ $$PH \subseteq P^{\text{Post-}BQP}.$$
 
 Bremner, Jozsa and Shepherd[^iqp1] showed that $\text{Post-}IQP = \text{Post-}BQP$.
 We will show that if $IQP$ circuits could be weakly simulated that this implies
-$\text{Post-}IQP \subseteq = \text{Post-}BPP$,
+$\text{Post-}IQP \subseteq \text{Post-}BPP$,
 thus resulting in a collapse of the Polynomial Hierarchy to the third level.
 Therefore, it is unlikely that $IQP$ circuits will ever be perfectly simulable by a classical algorithm.
 
