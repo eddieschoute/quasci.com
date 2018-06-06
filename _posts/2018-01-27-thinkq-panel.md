@@ -14,7 +14,7 @@ _Editor’s note: At the conclusion of the conference, the Vice President of IBM
 
 
 ![The ThinkQ panel]({{ site.url }}/img/thinkq-panel.jpg)
-_The ThinkQ 2017 Panel consisted of (left-to-right): Dave Bacon (Google), Andrew Childs (U. of Maryland), Richard Jozsa (U. of Cambridge), Dario Gil (IBM Q), Eleanor Rieffel (NASA), Matthias Steffen (Google), and Jungsang Kim (Duke U., IonQ)._
+_The ThinkQ 2017 Panel consisted of (left-to-right): Dave Bacon (Google), Andrew Childs (U. of Maryland), Richard Jozsa (U. of Cambridge), Dario Gil (IBM Q), Eleanor Rieffel (NASA), Matthias Steffen (IBM), and Jungsang Kim (Duke U., IonQ)._
 
 __Eddie:__ Andrew and Ani, I have to ask you what you thought about the ThinkQ conference.
 
