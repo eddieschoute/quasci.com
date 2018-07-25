@@ -98,7 +98,7 @@ to be efficient and indistinguishable from $\mathcal C$[^hakopscenario].
 
 
 ### Poly-Boxes and Simulations
-To be able to ε-simulate a circuit $\mathcal C$ it is first necessary to estimate the probabilities
+To be able to ε-simulate a circuit $\mathcal C$ we can first estimate the probabilities
 for some outcomes of its output probability distribution $\mathcal P_\mathcal C$.
 A _poly-box_ is a metaphorical device that estimates such probabilities in polynomial time.
 It is (presumably) not possible to efficiently estimate probabilities for general quantum circuits using
@@ -116,7 +116,7 @@ We want to be able to estimate probabilities for output strings $S ∈ \set{0,1,
 with a "$\bullet$" meaning "don't care": Match both $0$ and $1$.
 Then a poly-box is a classical algorithm that can estimate $\mathcal P(S)$
 for all $\mathcal P ∈ \mathbb P$
-efficiently in the number of samples $s \in \mathbb N$ and the number of qubits $n$.
+efficiently in the number of qubits, $n$, and the inverse error, $ε^{-1}$.
 
 _![What does a polybox do]({{ site.url }}/img/polybox.svg)_\\
 _With a poly-box we are able to estimate the probability of outcomes for a quantum circuit
@@ -357,8 +357,12 @@ would collapse to the third level.
 And we also introduced the notion of ε-simulation and poly-boxes to more precisely capture
 the notion of classically simulating quantum circuits.
 
-There are follow-up results[^iqpnoise] that show that $IQP$ circuits with noise
-become easy to simulate classically.
+There are follow-up results that show that sampling from $IQP$ circuits
+is hard even within an additive error ($\ell_1$ norm),
+asserting an average-case hardness conjecture[^iqpadditive].
+In this blog post we only looked at sampling within a multiplicative distance.
+Furthermore, later, the same authors show that noise can make it easy to simulate $IQP$
+circuits classically[^iqpnoise].
 But at the same time they introduce new notions of fault-tolerance to correct for this.
 It is clear that the research is still looking for new ways to precisely define
 what it means to have a _quantum advantage_.
@@ -370,6 +374,7 @@ _Thanks to Andrew Guo and Abhinav Deshpande for their help in writing this post.
 
 [^boson1]: Aaronson, Scott, and Alex Arkhipov. "The computational complexity of linear optics." Proceedings of the forty-third annual ACM symposium on Theory of computing. ACM, 2011. {% include doi.html doi='10.1145/1993636.1993682' %}
 [^iqp1]: Bremner, Michael J., Richard Jozsa, and Dan J. Shepherd. "Classical simulation of commuting quantum computations implies collapse of the polynomial hierarchy." Proceedings of the Royal Society of London A: Mathematical, Physical and Engineering Sciences. The Royal Society, 2010. {% include doi.html doi='10.1098/rspa.2010.0301' %}
+[^iqpadditive]: Bremner, Michael J., Ashley Montanaro, and Dan J. Shepherd. "Average-case complexity versus approximate simulation of commuting quantum computations." Physical Review Letters 117.8 (2016): 080501. {% include doi.html doi='10.1103/physrevlett.117.080501' %}
 [^iqpnoise]: Bremner, Michael J., Ashley Montanaro, and Dan J. Shepherd. "Achieving quantum supremacy with sparse and noisy commuting quantum computations." Quantum 1 (2017): 8. {% include doi.html doi='10.22331/q-2017-04-25-8' %}
 [^aurorabarak]: Arora, Sanjeev, and Boaz Barak. Computational complexity: a modern approach. Cambridge University Press, 2009.
 [^han]: Han, Yenjo, Lane A. Hemaspaandra, and Thomas Thierauf. "Threshold computation and cryptographic security." SIAM Journal on Computing 26.1 (1997): 59-78. {% include doi.html doi='10.1137/S0097539792240467' %}
